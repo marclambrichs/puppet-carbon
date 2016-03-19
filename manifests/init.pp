@@ -43,7 +43,7 @@ class carbon (
   $gr_whisper_ver  = $carbon::params::gr_whisper_ver,
   $gr_whisper_pkg  = $carbon::params::gr_whisper_pkg,
   $manage_packages = $carbon::params::manage_packages,
-) {
+) inherits carbon::params {
 
   validate_bool (
     $manage_packages

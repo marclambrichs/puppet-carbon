@@ -1,25 +1,22 @@
-# == Class graphite::install
+# == Class carbon::install
 #
 #
-class graphite::install inherits graphite {
+class carbon::install inherits carbon {
 
-  if $::graphite::manage_packages {
+  if $::carbon::manage_packages {
     create_resources('package', {
       'carbon'  => {
-        ensure => $::graphite::gr_carbon_ver,
-        name   => $::graphite::gr_carbon_pkg,
+        ensure => $::carbon::gr_carbon_ver,
+        name   => $::carbon::gr_carbon_pkg,
       },
       'twisted' => {
-        ensure => $::graphite::gr_twisted_ver,
-        name   => $::graphite::gr_twisted_pkg,
+        ensure => $::carbon::gr_twisted_ver,
+        name   => $::carbon::gr_twisted_pkg,
       },
       'whisper' => {
-        ensure => $::graphite::gr_whisper_ver,
-        name   => $::graphite::gr_whisper_pkg,
+        ensure => $::carbon::gr_whisper_ver,
+        name   => $::carbon::gr_whisper_pkg,
       },
-    }, {
-      provider => $::graphite::gr_pkg_provider,
-      require  => $::graphite::gr_pkg_require,
     }
     )
   }
