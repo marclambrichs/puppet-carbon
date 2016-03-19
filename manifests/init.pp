@@ -54,6 +54,7 @@ class carbon (
   $gr_conf_dir                           = $carbon::params::gr_conf_dir,
   $gr_enable_amqp                        = $carbon::params::gr_enable_amqp,
   $gr_enable_logrotation                 = $carbon::params::gr_enable_logrotation,
+  $gr_enable_relay                       = $carbon::params::gr_enable_relay,
   $gr_enable_udp_listener                = $carbon::params::gr_enable_udp_listener,
   $gr_line_receiver_backlog              = $carbon::params::gr_line_receiver_backlog,
   $gr_line_receiver_interface            = $carbon::params::gr_line_receiver_interface,
@@ -100,6 +101,7 @@ class carbon (
   validate_absolute_path( $gr_whitelists_dir )
  
   validate_bool (
+    $gr_enable_relay,
     $manage_packages
   )
 

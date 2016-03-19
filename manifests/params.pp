@@ -21,6 +21,7 @@ class carbon::params {
   $gr_enable_amqp                        = 'False'
   $gr_enable_logrotation                 = 'False'
   $gr_enable_udp_listener                = 'False'
+  $gr_enable_relay                       = false
   $gr_line_receiver_backlog              = undef
   $gr_line_receiver_interface            = '0.0.0.0'
   $gr_line_receiver_port                 = 2003

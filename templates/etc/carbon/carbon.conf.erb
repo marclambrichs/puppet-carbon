@@ -217,8 +217,8 @@ CARBON_METRIC_INTERVAL = <%= scope.lookupvar('carbon::gr_carbon_metric_interval'
 
 # Enable AMQP if you want to receve metrics using an amqp broker
 ENABLE_AMQP = <%= scope.lookupvar('carbon::gr_enable_amqp') %>
-<% if scope.lookupvar('carbon::gr_enable_amqp') == "True" -%>
 
+<% if scope.lookupvar('carbon::gr_enable_amqp') == "True" -%>
 # Verbose means a line will be logged for every metric received
 # useful for testing
 AMQP_VERBOSE = <%= scope.lookupvar('carbon::gr_amqp_verbose') %>
@@ -262,9 +262,17 @@ AMQP_METRIC_NAME_IN_BODY = <%= scope.lookupvar('carbon::gr_amqp_metric_name_in_b
 # and any other settings you want to customize, defaults are inherited
 # from [carbon] section.
 # You can then specify the --instance=b option to manage this instance
+<%
+  cache_instances = scope.lookupvar('graphite::gr_cache_instances')
+  if cache_instances != nil
+    cache_instances.sort.each do |name, params| -%>
+[cache:<%= name %>]
+<% params.sort.each do |param_name, param_value| -%>
+<%= param_name %> = <%= param_value %>
+<% end -%>
+<% end; end -%>
 
-
-
+<% if scope.lookupvar('carbon::gr_enable_relay') -%>
 [relay]
 LINE_RECEIVER_INTERFACE = 0.0.0.0
 LINE_RECEIVER_PORT = 2013
@@ -350,7 +358,7 @@ USE_FLOW_CONTROL = True
 # seconds. Set CARBON_METRIC_INTERVAL to 0 to disable instrumentation
 # CARBON_METRIC_PREFIX = carbon
 # CARBON_METRIC_INTERVAL = 60
-
+<% end -%>
 
 [aggregator]
 LINE_RECEIVER_INTERFACE = 0.0.0.0
