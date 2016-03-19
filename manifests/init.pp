@@ -36,13 +36,14 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class carbon (
-  $gr_carbon_ver   = $carbon::params::gr_carbon_ver,
-  $gr_carbon_pkg   = $carbon::params::gr_carbon_pkg,
-  $gr_twisted_ver  = $carbon::params::gr_twisted_ver,
-  $gr_twisted_pkg  = $carbon::params::gr_twisted_pkg,
-  $gr_whisper_ver  = $carbon::params::gr_whisper_ver,
-  $gr_whisper_pkg  = $carbon::params::gr_whisper_pkg,
-  $manage_packages = $carbon::params::manage_packages,
+  $gr_carbon_ver      = $carbon::params::gr_carbon_ver,
+  $gr_carbon_pkg      = $carbon::params::gr_carbon_pkg,
+  $gr_storage_schemas = $carbon::params::gr_storage_schemas,
+  $gr_twisted_ver     = $carbon::params::gr_twisted_ver,
+  $gr_twisted_pkg     = $carbon::params::gr_twisted_pkg,
+  $gr_whisper_ver     = $carbon::params::gr_whisper_ver,
+  $gr_whisper_pkg     = $carbon::params::gr_whisper_pkg,
+  $manage_packages    = $carbon::params::manage_packages,
 ) inherits carbon::params {
 
   validate_bool (
