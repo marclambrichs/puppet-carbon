@@ -1,7 +1,7 @@
 # == Class carbon::install
 #
 #
-class carbon::install inherits carbon {
+class carbon::install {
 
   if $::carbon::manage_packages {
     create_resources('package', {

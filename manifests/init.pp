@@ -146,4 +146,3 @@ class carbon (
   class { 'carbon::service': } ->
   anchor { 'carbon::end': }
 }
-
