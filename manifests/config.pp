@@ -19,14 +19,14 @@ class carbon::config {
 #    notify => Service[$carbon_c_relay::service_name]
   }
 
-  concat::fragment { 'header':
+  concat::fragment { 'carbon.conf':
     target  => $config_file,
     order   => '10',
     content => template('carbon/etc/carbon/carbon.conf.erb')
   }
 
   concat::fragment { '[cache]':
-    target  => $carbon_c_relay::config_file,
+    target  => $config_file,
     content => template('carbon/etc/carbon/carbon.conf/cache.erb'),
     order   => '20',
   }

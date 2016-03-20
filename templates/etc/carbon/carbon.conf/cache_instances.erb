@@ -1,0 +1,18 @@
+# To configure special settings for the carbon-cache instance 'b', uncomment this:
+#[cache:b]
+#LINE_RECEIVER_PORT = 2103
+#PICKLE_RECEIVER_PORT = 2104
+#CACHE_QUERY_PORT = 7102
+# and any other settings you want to customize, defaults are inherited
+# from [carbon] section.
+# You can then specify the --instance=b option to manage this instance
+<%
+  cache_instances = scope.lookupvar('graphite::cc_cache_instances')
+  if cache_instances != nil
+    cache_instances.sort.each do |name, params| -%>
+[cache:<%= name %>]
+<% params.sort.each do |param_name, param_value| -%>
+<%= param_name %> = <%= param_value %>
+<% end -%>
+<% end; end -%>
+
