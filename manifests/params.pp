@@ -66,7 +66,8 @@ class carbon::params {
   $gr_carbon_pkg                         = 'python-carbon'
   $gr_config_dir                         = '/etc/carbon/'
   $gr_config_file                        = 'carbon.conf'
-  $gr_enable_relay                       = false
+  $gr_enable_carbon_cache                = true
+  $gr_enable_carbon_relay                = false
   $gr_twisted_pkg                        = 'python-twisted-core'
   $gr_user                               = 'carbon'
   $gr_whisper_pkg                        = 'python-whisper'

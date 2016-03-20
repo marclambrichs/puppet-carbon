@@ -9,25 +9,26 @@ class carbon::config {
 #      mode    => '0644';
 #  }
 
-  $config_file = "${carbon::gr_config_dir}/${carbon::gr_config_file}"
+  if $carbon::gr_enable_carbon_cache {
 
-  concat { $config_file:
-    ensure => present,
-    owner  => root,
-    group  => root,
-    mode   => '0644',
-#    notify => Service[$carbon_c_relay::service_name]
-  }
-
-  concat::fragment { 'carbon.conf':
-    target  => $config_file,
-    order   => '10',
-    content => template('carbon/etc/carbon/carbon.conf.erb')
-  }
-
-  concat::fragment { '[cache]':
-    target  => $config_file,
-    content => template('carbon/etc/carbon/carbon.conf/cache.erb'),
-    order   => '20',
+    concat { $carbon::config_file:
+      ensure => present,
+      owner  => root,
+      group  => root,
+      mode   => '0644',
+  #    notify => Service[$carbon_c_relay::service_name]
+    }
+  
+    concat::fragment { 'carbon.conf':
+      target  => $carbon::config_file,
+      order   => '10',
+      content => template('carbon/etc/carbon/carbon.conf.erb')
+    }
+  
+    concat::fragment { '[cache]':
+      target  => $carbon::config_file,
+      content => template('carbon/etc/carbon/carbon.conf/cache.erb'),
+      order   => '20',
+    }
   }
 }
