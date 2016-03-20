@@ -24,11 +24,11 @@ class carbon::config {
       order   => '10',
       content => template('carbon/etc/carbon/carbon.conf.erb')
     }
-  
-    concat::fragment { '[cache]':
-      target  => $carbon::config_file,
-      content => template('carbon/etc/carbon/carbon.conf/cache.erb'),
-      order   => '20',
+
+    if empty( $carbon::cc_carbon_caches ) {
+      create_resources( 'carbon::config::cache', { a => undef } )
+    } else {
+      create_resources( 'carbon::config::cache', $carbon::cc_carbon_caches )
     }
   }
 }

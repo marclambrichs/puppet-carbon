@@ -16,6 +16,7 @@ class carbon::params {
   $cc_cache_query_interface              = '0.0.0.0'
   $cc_cache_query_port                   = 7002
   $cc_cache_write_strategy               = 'sorted'
+  $cc_carbon_caches                      = {}
   $cc_carbon_metric_interval             = 60
   $cc_carbon_metric_prefix               = 'carbon'
   $cc_enable_amqp                        = 'False'
@@ -23,7 +24,7 @@ class carbon::params {
   $cc_enable_udp_listener                = 'False'
   $cc_line_receiver_backlog              = undef
   $cc_line_receiver_interface            = '0.0.0.0'
-  $cc_line_receiver_port                 = 2203
+  $cc_line_receiver_port                 = 2003
   $cc_local_data_dir                     = '/var/lib/carbon/whisper/'
   $cc_log_cache_hits                     = 'False'
   $cc_log_cache_queue_sorts              = 'True'
@@ -36,7 +37,7 @@ class carbon::params {
   $cc_max_updates_per_second_on_shutdown = undef
   $cc_pickle_receiver_backlog            = undef
   $cc_pickle_receiver_interface          = '0.0.0.0'
-  $cc_pickle_receiver_port               = 2204
+  $cc_pickle_receiver_port               = 2004
   $cc_pid_dir                            = '/var/run/'
   $cc_storage_dir                        = '/var/lib/carbon/'
   $cc_storage_schemas                    = [
@@ -52,7 +53,7 @@ class carbon::params {
     }
   ]
   $cc_udp_receiver_interface             = '0.0.0.0'
-  $cc_udp_receiver_port                  = 2203
+  $cc_udp_receiver_port                  = 2003
   $cc_use_flow_control                   = 'True'
   $cc_use_insecure_unpickler             = 'False'
   $cc_use_whitelist                      = undef

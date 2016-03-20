@@ -47,6 +47,7 @@ class carbon (
   $cc_cache_query_interface              = $carbon::params::cc_cache_query_interface,
   $cc_cache_query_port                   = $carbon::params::cc_cache_query_port,
   $cc_cache_write_strategy               = $carbon::params::cc_cache_write_strategy,
+  $cc_carbon_caches                      = $carbon::params::cc_carbon_caches,
   $cc_carbon_metric_interval             = $carbon::params::cc_carbon_metric_interval,
   $cc_carbon_metric_prefix               = $carbon::params::cc_carbon_metric_prefix,
   $cc_enable_amqp                        = $carbon::params::cc_enable_amqp,
