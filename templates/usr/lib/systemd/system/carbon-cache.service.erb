@@ -7,7 +7,7 @@ After=network.target
 Type=forking
 StandardOutput=syslog
 StandardError=syslog
-ExecStart=/usr/bin/carbon-cache --config=/etc/carbon/carbon.conf --pidfile=/var/run/carbon-cache-<%= @title %>.pid --instance=<%= @title %>
+ExecStart=/usr/bin/carbon-cache --config=/etc/carbon/carbon.conf --pidfile=/var/run/carbon-cache-<%= @title %>.pid --instance=<%= @title %> start
 ExecReload=/bin/kill -USR1 $MAINPID
 PIDFile=/var/run/carbon-cache-<%= @title %>.pid
 
