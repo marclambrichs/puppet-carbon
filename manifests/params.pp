@@ -21,6 +21,7 @@ class carbon::params {
   $cc_carbon_metric_prefix               = 'carbon'
   $cc_enable_amqp                        = 'False'
   $cc_enable_logrotation                 = 'False'
+  $cc_enable_manhole                     = 'False'
   $cc_enable_udp_listener                = 'False'
   $cc_line_receiver_backlog              = undef
   $cc_line_receiver_interface            = '0.0.0.0'
@@ -31,6 +32,10 @@ class carbon::params {
   $cc_log_dir                            = '/var/log/carbon/'
   $cc_log_listener_connections           = 'True'
   $cc_log_updates                        = 'False'
+  $cc_manhole_interface                  = '127.0.0.1'
+  $cc_manhole_user                       = 'admin'
+  $cc_manhole_port                       = 7222
+  $cc_manhole_pubic_key                  = undef
   $cc_max_cache_size                     = 'inf'
   $cc_max_creates_per_minute             = 50
   $cc_max_updates_per_second             = 500
