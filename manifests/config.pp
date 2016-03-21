@@ -30,5 +30,13 @@ class carbon::config {
     } else {
       create_resources( 'carbon::config::cache', $carbon::cc_carbon_caches )
     }
+
+    if !empty( $carbon::cc_carbon_caches ) {
+      file { '/usr/lib/systemd/system/carbon-cache.service':
+        ensure => absent,
+      }
+
+      carbon::config::service { keys( $carbon::cc_carbon_caches ): }
+    }
   }
 }
