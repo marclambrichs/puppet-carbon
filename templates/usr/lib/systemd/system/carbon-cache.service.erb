@@ -1,0 +1,15 @@
+# /usr/lib/systemd/system/carbon-cache-<%= @cache_name %>.service
+[Unit]
+Description=Graphite Carbon Cache <%= @cache_name %>
+After=network.target
+
+[Service]
+Type=forking
+StandardOutput=syslog
+StandardError=syslog
+ExecStart=/usr/bin/carbon-cache-a --config=/etc/carbon/carbon.conf --pidfile=/var/run/carbon-cache-<%= @cache_name %>.pid --instance=<%= @cache_name %>
+ExecReload=/bin/kill -USR1 $MAINPID
+PIDFile=/var/run/carbon-cache-<%= @cache_name %>.pid
+
+[Install]
+WantedBy=multi-user.target
