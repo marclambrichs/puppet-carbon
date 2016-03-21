@@ -23,8 +23,6 @@ class carbon::params {
   $cc_enable_manhole                     = 'False'
   $cc_enable_udp_listener                = 'False'
   $cc_line_receiver_backlog              = undef
-  $cc_line_receiver_interface            = '0.0.0.0'
-  $cc_line_receiver_port                 = 2003
   $cc_local_data_dir                     = '/var/lib/carbon/whisper'
   $cc_log_cache_hits                     = 'False'
   $cc_log_cache_queue_sorts              = 'True'
@@ -40,8 +38,6 @@ class carbon::params {
   $cc_max_updates_per_second             = 500
   $cc_max_updates_per_second_on_shutdown = undef
   $cc_pickle_receiver_backlog            = undef
-  $cc_pickle_receiver_interface          = '0.0.0.0'
-  $cc_pickle_receiver_port               = 2004
   $cc_pid_dir                            = '/var/run'
   $cc_storage_dir                        = '/var/lib/carbon'
   $cc_storage_aggregations               = [
@@ -82,8 +78,6 @@ class carbon::params {
       retentions => '60s:1d'
     }
   ]
-  $cc_udp_receiver_interface             = '0.0.0.0'
-  $cc_udp_receiver_port                  = 2003
   $cc_use_flow_control                   = 'True'
   $cc_use_insecure_unpickler             = 'False'
   $cc_use_whitelist                      = undef
@@ -97,6 +91,7 @@ class carbon::params {
   $gr_carbon_pkg                         = 'python-carbon'
   $gr_config_dir                         = '/etc/carbon'
   $gr_config_file                        = 'carbon.conf'
+  $gr_group                              = 'carbon'
   $gr_enable_carbon_cache                = true
   $gr_enable_carbon_relay                = false
   $gr_systemd_dir                        = '/usr/lib/systemd/system'

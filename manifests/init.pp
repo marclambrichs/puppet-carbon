@@ -4,6 +4,9 @@
 #
 # === Parameters
 #
+# [*gr_group*]
+#   Default: carbon
+#
 # [*gr_user*]
 #   Specify the user to drop privileges to
 #   If this is blank carbon runs as the user that invokes it
@@ -211,8 +214,6 @@ class carbon (
   $cc_enable_manhole                     = $carbon::params::cc_enable_manhole,
   $cc_enable_udp_listener                = $carbon::params::cc_enable_udp_listener,
   $cc_line_receiver_backlog              = $carbon::params::cc_line_receiver_backlog,
-  $cc_line_receiver_interface            = $carbon::params::cc_line_receiver_interface,
-  $cc_line_receiver_port                 = $carbon::params::cc_line_receiver_port,
   $cc_local_data_dir                     = $carbon::params::cc_local_data_dir,
   $cc_log_cache_hits                     = $carbon::params::cc_log_cache_hits,
   $cc_log_cache_queue_sorts              = $carbon::params::cc_log_cache_queue_sorts,
@@ -228,14 +229,10 @@ class carbon (
   $cc_max_updates_per_second             = $carbon::params::cc_max_updates_per_second,
   $cc_max_updates_per_second_on_shutdown = $carbon::params::cc_max_updates_per_second_on_shutdown,
   $cc_pickle_receiver_backlog            = $carbon::params::cc_pickle_receiver_backlog,
-  $cc_pickle_receiver_interface          = $carbon::params::cc_pickle_receiver_interface,
-  $cc_pickle_receiver_port               = $carbon::params::cc_pickle_receiver_port,
   $cc_pid_dir                            = $carbon::params::cc_pid_dir,
   $cc_storage_aggregations               = $carbon::params::cc_storage_aggregations,
   $cc_storage_dir                        = $carbon::params::cc_storage_dir,
   $cc_storage_schemas                    = $carbon::params::cc_storage_schemas,
-  $cc_udp_receiver_interface             = $carbon::params::cc_udp_receiver_interface,
-  $cc_udp_receiver_port                  = $carbon::params::cc_udp_receiver_port,
   $cc_use_flow_control                   = $carbon::params::cc_use_flow_control,
   $cc_use_insecure_unpickler             = $carbon::params::cc_use_insecure_unpickler,
   $cc_use_whitelist                      = $carbon::params::cc_use_whitelist,

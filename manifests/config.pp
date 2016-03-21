@@ -7,7 +7,9 @@ class carbon::config {
     "${carbon::gr_config_dir}/storage-schemas.conf":
       ensure  => file,
       content => template("carbon${carbon::gr_config_dir}/storage-schemas.conf.erb"),
+      group   => $carbon::gr_group,
       mode    => '0644',
+      owner   => $carbon::gr_user,
   }
 
   ### create storage-aggregation.conf
@@ -15,7 +17,9 @@ class carbon::config {
     "${carbon::gr_config_dir}/storage-aggregation.conf":
       ensure  => file,
       content => template("carbon${carbon::gr_config_dir}/storage-aggregation.conf.erb"),
+      group   => $carbon::gr_group,
       mode    => '0644',
+      owner   => $carbon::gr_user,
   }
 
   if $carbon::gr_enable_carbon_cache {
@@ -23,9 +27,9 @@ class carbon::config {
     ### create carbon.conf file
     concat { $carbon::config_file:
       ensure => present,
-      owner  => root,
-      group  => root,
+      group  => $carbon::gr_group,
       mode   => '0644',
+      owner  => $carbon::gr_user,
   #    notify => Service[$carbon_c_relay::service_name]
     }
   
