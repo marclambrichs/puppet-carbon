@@ -202,7 +202,6 @@ class carbon (
   $cc_bind_patterns                      = $carbon::params::cc_bind_patterns,
   $cc_cache_query_backlog                = $carbon::params::cc_cache_query_backlog,
   $cc_cache_query_interface              = $carbon::params::cc_cache_query_interface,
-  $cc_cache_query_port                   = $carbon::params::cc_cache_query_port,
   $cc_cache_write_strategy               = $carbon::params::cc_cache_write_strategy,
   $cc_carbon_caches                      = $carbon::params::cc_carbon_caches,
   $cc_carbon_metric_interval             = $carbon::params::cc_carbon_metric_interval,

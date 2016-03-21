@@ -14,7 +14,6 @@ class carbon::params {
   $cc_amqp_vhost                         = '/'
   $cc_cache_query_backlog                = undef
   $cc_cache_query_interface              = '0.0.0.0'
-  $cc_cache_query_port                   = 7002
   $cc_cache_write_strategy               = 'sorted'
   $cc_carbon_caches                      = {}
   $cc_carbon_metric_interval             = 60

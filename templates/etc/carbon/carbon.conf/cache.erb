@@ -16,7 +16,7 @@ BIND_PATTERNS                      = <%= scope.lookupvar('carbon::cc_bind_patter
 CACHE_QUERY_BACKLOG                = <%= scope['carbon::cc_cache_query_backlog'] %>
 <% end -%>
 CACHE_QUERY_INTERFACE              = <%= scope.lookupvar('carbon::cc_cache_query_interface') %>
-CACHE_QUERY_PORT                   = <%= scope.lookupvar('carbon::cc_cache_query_port') %>
+CACHE_QUERY_PORT                   = <%= @cache_query_port %>
 CACHE_WRITE_STRATEGY               = <%= scope.lookupvar('carbon::cc_cache_write_strategy') %>
 CARBON_METRIC_PREFIX               = <%= scope.lookupvar('carbon::cc_carbon_metric_prefix') %>
 CARBON_METRIC_INTERVAL             = <%= scope.lookupvar('carbon::cc_carbon_metric_interval') %>
