@@ -44,6 +44,32 @@ class carbon::params {
   $cc_pickle_receiver_port               = 2004
   $cc_pid_dir                            = '/var/run'
   $cc_storage_dir                        = '/var/lib/carbon'
+  $cc_storage_aggregations               = [
+    {
+      name => 'min',
+      pattern => '\.min$',
+      xFilesFactor => 0.1,
+      aggregationMethod => 'min'
+    },
+    {
+      name => 'max',
+      pattern => '\.max$',
+      xFilesFactor => 0.1,
+      aggregationMethod => 'max'
+    },
+    {
+      name => 'sum',
+      pattern => '\.count$',
+      xFilesFactor => 0,
+      aggregationMethod => 'sum',
+    },
+    {
+      name => 'default_average',
+      pattern => '.*',
+      xFilesFactor => 0.5,
+      aggregationMethod => 'average'
+    },
+  ]
   $cc_storage_schemas                    = [
     {
       name       => 'carbon',

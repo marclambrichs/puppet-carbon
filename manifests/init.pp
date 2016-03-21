@@ -231,6 +231,7 @@ class carbon (
   $cc_pickle_receiver_interface          = $carbon::params::cc_pickle_receiver_interface,
   $cc_pickle_receiver_port               = $carbon::params::cc_pickle_receiver_port,
   $cc_pid_dir                            = $carbon::params::cc_pid_dir,
+  $cc_storage_aggregations               = $carbon::params::cc_storage_aggregations,
   $cc_storage_dir                        = $carbon::params::cc_storage_dir,
   $cc_storage_schemas                    = $carbon::params::cc_storage_schemas,
   $cc_udp_receiver_interface             = $carbon::params::cc_udp_receiver_interface,
@@ -268,6 +269,7 @@ class carbon (
   validate_absolute_path( $cc_storage_dir )
   validate_absolute_path( $cc_whitelists_dir )
 
+  validate_array( $cc_storage_aggregations )
   validate_array( $cc_storage_schemas )
 
   validate_bool (
