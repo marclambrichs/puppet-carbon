@@ -101,9 +101,9 @@ class carbon::params {
     'RedHat', 'CentOS': {
       case $::operatingsystemmajrelease {
         /^7$/: {
-          $gr_carbon_ver   = '0.9.15-1.el7'
-          $gr_twisted_ver  = '12.2.0-4.el7'
-          $gr_whisper_ver  = '0.9.15-1.el7'
+          $gr_carbon_ver   = 'present'
+          $gr_twisted_ver  = 'present'
+          $gr_whisper_ver  = 'present'
         }
         default: {
           fail("unsupported RedHat major release: ${::operatingsystemmajrelease}")

@@ -290,9 +290,9 @@ class carbon (
   validate_re( $cc_whisper_autoflush, 'False|True' )
   validate_re( $cc_whisper_fallocate_create, 'False|True' )
 
-  validate_re( $gr_carbon_ver, '^\d+\.\d+\.\d+' )
-  validate_re( $gr_twisted_ver, '^\d+\.\d+\.\d+' )
-  validate_re( $gr_whisper_ver, '^\d+\.\d+\.\d+' )
+  validate_re( $gr_carbon_ver, '^(present|\d+\.\d+\.\d+)$' )
+  validate_re( $gr_twisted_ver, '^(present|\d+\.\d+\.\d+)$' )
+  validate_re( $gr_whisper_ver, '^(present|\d+\.\d+\.\d+)$' )
 
   validate_string(
     $cc_amqp_exchange,

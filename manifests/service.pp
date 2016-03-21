@@ -10,6 +10,7 @@ class carbon::service {
       mode    => '0750',
       require => Concat[$carbon::config_file]
     }
+
   }
 
 }
