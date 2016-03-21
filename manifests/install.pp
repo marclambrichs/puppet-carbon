@@ -3,6 +3,14 @@
 #
 class carbon::install {
 
+  group { $carbon::gr_group:
+    ensure => present
+  } ->
+  user { $carbon::gr_user:
+    ensure => present,
+    groups => $carbon::gr_group
+  }
+
   if $::carbon::manage_packages {
     create_resources('package', {
       'carbon'  => {
