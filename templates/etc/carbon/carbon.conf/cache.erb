@@ -179,43 +179,26 @@ LINE_RECEIVER_BACKLOG              = <%= scope['carbon::cc_line_receiver_backlog
 CACHE_QUERY_BACKLOG                = <%= scope['carbon::cc_cache_query_backlog'] %>
 <% end -%>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # By default, carbon itself will log statistics (such as a count,
 # metricsReceived) with the top level prefix of 'carbon' at an interval of 60
 # seconds. Set CARBON_METRIC_INTERVAL to 0 to disable instrumentation
-CARBON_METRIC_PREFIX = <%= scope.lookupvar('carbon::cc_carbon_metric_prefix') %>
-CARBON_METRIC_INTERVAL = <%= scope.lookupvar('carbon::cc_carbon_metric_interval') %>
+CARBON_METRIC_PREFIX               = <%= scope.lookupvar('carbon::cc_carbon_metric_prefix') %>
+CARBON_METRIC_INTERVAL             = <%= scope.lookupvar('carbon::cc_carbon_metric_interval') %>
 
 # Enable AMQP if you want to receve metrics using an amqp broker
-ENABLE_AMQP = <%= scope.lookupvar('carbon::cc_enable_amqp') %>
+ENABLE_AMQP                        = <%= scope.lookupvar('carbon::cc_enable_amqp') %>
 
 <% if scope.lookupvar('carbon::cc_enable_amqp') == "True" -%>
 # Verbose means a line will be logged for every metric received
 # useful for testing
-AMQP_VERBOSE = <%= scope.lookupvar('carbon::cc_amqp_verbose') %>
-
-AMQP_HOST = <%= scope.lookupvar('carbon::cc_amqp_host') %>
-AMQP_PORT = <%= scope.lookupvar('carbon::cc_amqp_port') %>
-AMQP_VHOST = <%= scope.lookupvar('carbon::cc_amqp_vhost') %>
-AMQP_USER = <%= scope.lookupvar('carbon::cc_amqp_user') %>
-AMQP_PASSWORD = <%= scope.lookupvar('carbon::cc_amqp_password') %>
-AMQP_EXCHANGE = <%= scope.lookupvar('carbon::cc_amqp_exchange') %>
-AMQP_METRIC_NAME_IN_BODY = <%= scope.lookupvar('carbon::cc_amqp_metric_name_in_body') %>
+AMQP_VERBOSE                       = <%= scope.lookupvar('carbon::cc_amqp_verbose') %>
+AMQP_HOST                          = <%= scope.lookupvar('carbon::cc_amqp_host') %>
+AMQP_PORT                          = <%= scope.lookupvar('carbon::cc_amqp_port') %>
+AMQP_VHOST                         = <%= scope.lookupvar('carbon::cc_amqp_vhost') %>
+AMQP_USER                          = <%= scope.lookupvar('carbon::cc_amqp_user') %>
+AMQP_PASSWORD                      = <%= scope.lookupvar('carbon::cc_amqp_password') %>
+AMQP_EXCHANGE                      = <%= scope.lookupvar('carbon::cc_amqp_exchange') %>
+AMQP_METRIC_NAME_IN_BODY           = <%= scope.lookupvar('carbon::cc_amqp_metric_name_in_body') %>
 <% end -%>
 
 # The manhole interface allows you to SSH into the carbon daemon
