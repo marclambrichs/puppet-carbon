@@ -2,12 +2,12 @@
 
 class carbon::config {
 
-#  file {
-#    '/etc/carbon/storage-schemas.conf':
-#      ensure  => file,
-#      content => template('carbon/etc/carbon/storage-schemas.conf.erb'),
-#      mode    => '0644';
-#  }
+  file {
+    '/etc/carbon/storage-schemas.conf':
+      ensure  => file,
+      content => template('carbon/etc/carbon/storage-schemas.conf.erb'),
+      mode    => '0644';
+  }
 
   if $carbon::gr_enable_carbon_cache {
 

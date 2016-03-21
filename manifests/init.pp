@@ -267,10 +267,14 @@ class carbon (
   validate_absolute_path( $cc_storage_dir )
   validate_absolute_path( $cc_whitelists_dir )
 
+  validate_array( $cc_storage_schemas )
+
   validate_bool (
     $gr_enable_carbon_relay,
     $manage_packages
   )
+
+  validate_hash( $cc_carbon_caches )
 
   validate_re( $cc_amqp_metric_name_in_body, 'False|True' )
   validate_re( $cc_amqp_verbose, 'False|True' )
