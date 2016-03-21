@@ -14,9 +14,12 @@
 #   Port can be set to 0 to disable this listener if it is not required.
 define carbon::config::cache (
   $cache_name                = $title,
+  $cache_query_interface     = '0.0.0.0',
   $cache_query_port          = 7002,
   $line_receiver_interface   = '0.0.0.0',
   $line_receiver_port        = 2203,
+  $manhole_interface         = undef,
+  $manhole_port              = undef,
   $udp_receiver_interface    = '0.0.0.0',
   $udp_receiver_port         = 2203,
   $pickle_receiver_interface = '0.0.0.0',

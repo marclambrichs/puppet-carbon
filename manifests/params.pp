@@ -13,7 +13,6 @@ class carbon::params {
   $cc_amqp_user                          = 'guest'
   $cc_amqp_vhost                         = '/'
   $cc_cache_query_backlog                = undef
-  $cc_cache_query_interface              = '0.0.0.0'
   $cc_cache_write_strategy               = 'sorted'
   $cc_carbon_caches                      = {}
   $cc_carbon_metric_interval             = 60
@@ -29,9 +28,7 @@ class carbon::params {
   $cc_log_dir                            = '/var/log/carbon'
   $cc_log_listener_connections           = 'True'
   $cc_log_updates                        = 'False'
-  $cc_manhole_interface                  = '127.0.0.1'
   $cc_manhole_user                       = 'admin'
-  $cc_manhole_port                       = 7222
   $cc_manhole_pubic_key                  = undef
   $cc_max_cache_size                     = 'inf'
   $cc_max_creates_per_minute             = 50
