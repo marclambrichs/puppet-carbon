@@ -20,8 +20,8 @@
 . /etc/rc.d/init.d/functions
 
 CARBON_DAEMON="cache"
-GRAPHITE_CONFIG="<%= scope.lookupvar('carbon::gr_config_dir') %><%= scope.lookupvar('carbon::gr_config_file') %>"
-PID_DIR="<%= scope.lookupvar('carbon::cc_pid_dir') %>"
+GRAPHITE_CONFIG="<%= scope.lookupvar('carbon::gr_config_dir') %>/<%= scope.lookupvar('carbon::gr_config_file') %>"
+PID_DIR="<%= scope.lookupvar('carbon::cc_pid_dir') %>/"
 OPERATION="$1"
 if [ $# -gt 1 ]; then
     shift

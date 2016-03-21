@@ -20,7 +20,7 @@ CACHE_QUERY_PORT                   = <%= @cache_query_port %>
 CACHE_WRITE_STRATEGY               = <%= scope.lookupvar('carbon::cc_cache_write_strategy') %>
 CARBON_METRIC_PREFIX               = <%= scope.lookupvar('carbon::cc_carbon_metric_prefix') %>
 CARBON_METRIC_INTERVAL             = <%= scope.lookupvar('carbon::cc_carbon_metric_interval') %>
-CONF_DIR                           = <%= scope.lookupvar('carbon::gr_config_dir') %>
+CONF_DIR                           = <%= scope.lookupvar('carbon::gr_config_dir') %>/
 ENABLE_AMQP                        = <%= scope.lookupvar('carbon::cc_enable_amqp') %>
 ENABLE_LOGROTATION                 = <%= scope.lookupvar('carbon::cc_enable_logrotation') %>
 ENABLE_MANHOLE                     = <%= scope.lookupvar('carbon::cc_enable_manhole') %>
@@ -31,11 +31,11 @@ LINE_RECEIVER_BACKLOG              = <%= scope['carbon::cc_line_receiver_backlog
 LINE_RECEIVER_INTERFACE            = <%= @line_receiver_interface %>
 LINE_RECEIVER_PORT                 = <%= @line_receiver_port %>
 <% if scope.lookupvar('carbon::cc_local_data_dir') -%>
-LOCAL_DATA_DIR                     = <%= scope.lookupvar('carbon::cc_local_data_dir') %>
+LOCAL_DATA_DIR                     = <%= scope.lookupvar('carbon::cc_local_data_dir') %>/
 <% end -%>
 LOG_CACHE_HITS                     = <%= scope.lookupvar('carbon::cc_log_cache_hits') %>
 LOG_CACHE_QUEUE_SORTS              = <%= scope.lookupvar('carbon::cc_log_cache_queue_sorts') %>
-LOG_DIR                            = <%= scope.lookupvar('carbon::cc_log_dir') %>
+LOG_DIR                            = <%= scope.lookupvar('carbon::cc_log_dir') %>/
 LOG_LISTENER_CONNECTIONS           = <%= scope.lookupvar('carbon::cc_log_listener_connections') %>
 LOG_UPDATES                        = <%= scope.lookupvar('carbon::cc_log_updates') %>
 <% if scope.lookupvar('carbon::cc_enable_manhole') == "True" -%>
@@ -55,8 +55,8 @@ PICKLE_RECEIVER_PORT               = <%= @pickle_receiver_port %>
 <% unless [:undef, nil].include? scope['carbon::cc_pickle_receiver_backlog'] -%>
 PICKLE_RECEIVER_BACKLOG            = <%= scope['carbon::cc_pickle_receiver_backlog'] %>
 <% end -%>
-PID_DIR                            = <%= scope.lookupvar('carbon::cc_pid_dir') %>
-STORAGE_DIR                        = <%= scope.lookupvar('carbon::cc_storage_dir') %>
+PID_DIR                            = <%= scope.lookupvar('carbon::cc_pid_dir') %>/
+STORAGE_DIR                        = <%= scope.lookupvar('carbon::cc_storage_dir') %>/
 UDP_RECEIVER_INTERFACE             = <%= @udp_receiver_interface %>
 UDP_RECEIVER_PORT                  = <%= @udp_receiver_port %>
 USE_FLOW_CONTROL                   = <%= scope.lookupvar('carbon::cc_use_flow_control') %>
@@ -73,5 +73,5 @@ WHISPER_LOCK_WRITES                = <%= scope['carbon::cc_whisper_lock_writes']
 <% unless [:undef, nil].include? scope['carbon::cc_whisper_sparse_create'] -%>
 WHISPER_SPARSE_CREATE              = <%= scope['carbon::cc_whisper_sparse_create'] %>
 <% end -%>
-WHITELISTS_DIR                     = <%= scope.lookupvar('carbon::cc_whitelists_dir') %>
+WHITELISTS_DIR                     = <%= scope.lookupvar('carbon::cc_whitelists_dir') %>/
 

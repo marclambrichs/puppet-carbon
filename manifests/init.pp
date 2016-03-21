@@ -249,6 +249,7 @@ class carbon (
   $gr_config_file                        = $carbon::params::gr_config_file,
   $gr_enable_carbon_cache                = $carbon::params::gr_enable_carbon_cache,
   $gr_enable_carbon_relay                = $carbon::params::gr_enable_carbon_relay,
+  $gr_systemd_dir                        = $carbon::params::gr_systemd_dir,
   $gr_twisted_pkg                        = $carbon::params::gr_twisted_pkg,
   $gr_twisted_ver                        = $carbon::params::gr_twisted_ver,
   $gr_user                               = $carbon::params::gr_user,
@@ -257,9 +258,10 @@ class carbon (
   $manage_packages                       = $carbon::params::manage_packages,
 ) inherits carbon::params {
 
-  $config_file = "${gr_config_dir}${gr_config_file}"
+  $config_file = "${gr_config_dir}/${gr_config_file}"
 
   validate_absolute_path( $gr_config_dir )
+  validate_absolute_path( $gr_systemd_dir )
   validate_absolute_path( $cc_local_data_dir )
   validate_absolute_path( $cc_log_dir )
   validate_absolute_path( $cc_pid_dir )

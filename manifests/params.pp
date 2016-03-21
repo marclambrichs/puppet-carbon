@@ -25,10 +25,10 @@ class carbon::params {
   $cc_line_receiver_backlog              = undef
   $cc_line_receiver_interface            = '0.0.0.0'
   $cc_line_receiver_port                 = 2003
-  $cc_local_data_dir                     = '/var/lib/carbon/whisper/'
+  $cc_local_data_dir                     = '/var/lib/carbon/whisper'
   $cc_log_cache_hits                     = 'False'
   $cc_log_cache_queue_sorts              = 'True'
-  $cc_log_dir                            = '/var/log/carbon/'
+  $cc_log_dir                            = '/var/log/carbon'
   $cc_log_listener_connections           = 'True'
   $cc_log_updates                        = 'False'
   $cc_manhole_interface                  = '127.0.0.1'
@@ -42,8 +42,8 @@ class carbon::params {
   $cc_pickle_receiver_backlog            = undef
   $cc_pickle_receiver_interface          = '0.0.0.0'
   $cc_pickle_receiver_port               = 2004
-  $cc_pid_dir                            = '/var/run/'
-  $cc_storage_dir                        = '/var/lib/carbon/'
+  $cc_pid_dir                            = '/var/run'
+  $cc_storage_dir                        = '/var/lib/carbon'
   $cc_storage_schemas                    = [
     {
       name       => 'carbon',
@@ -61,7 +61,7 @@ class carbon::params {
   $cc_use_flow_control                   = 'True'
   $cc_use_insecure_unpickler             = 'False'
   $cc_use_whitelist                      = undef
-  $cc_whitelists_dir                     = '/var/lib/carbon/lists/'
+  $cc_whitelists_dir                     = '/var/lib/carbon/lists'
   $cc_whisper_fallocate_create           = 'True'
   $cc_whisper_autoflush                  = 'False'
   $cc_whisper_lock_writes                = undef
@@ -69,10 +69,11 @@ class carbon::params {
 
   ### global variables for cache, relay and aggregator
   $gr_carbon_pkg                         = 'python-carbon'
-  $gr_config_dir                         = '/etc/carbon/'
+  $gr_config_dir                         = '/etc/carbon'
   $gr_config_file                        = 'carbon.conf'
   $gr_enable_carbon_cache                = true
   $gr_enable_carbon_relay                = false
+  $gr_systemd_dir                        = '/usr/lib/systemd/system'
   $gr_twisted_pkg                        = 'python-twisted-core'
   $gr_user                               = 'carbon'
   $gr_whisper_pkg                        = 'python-whisper'

@@ -3,9 +3,9 @@
 class carbon::config {
 
   file {
-    '/etc/carbon/storage-schemas.conf':
+    "${carbon::gr_config_dir}/storage-schemas.conf":
       ensure  => file,
-      content => template('carbon/etc/carbon/storage-schemas.conf.erb'),
+      content => template("carbon${carbon::gr_config_dir}/storage-schemas.conf.erb"),
       mode    => '0644';
   }
 
@@ -22,7 +22,7 @@ class carbon::config {
     concat::fragment { 'carbon.conf':
       target  => $carbon::config_file,
       order   => '10',
-      content => template('carbon/etc/carbon/carbon.conf.erb')
+      content => template("carbon${carbon::gr_config_dir}/carbon.conf.erb")
     }
 
     if empty( $carbon::cc_carbon_caches ) {
@@ -32,7 +32,7 @@ class carbon::config {
     }
 
     if !empty( $carbon::cc_carbon_caches ) {
-      file { '/usr/lib/systemd/system/carbon-cache.service':
+      file { "${carbon::gr_systemd_dir}/carbon-cache.service":
         ensure => absent,
       }
 
