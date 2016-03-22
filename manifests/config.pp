@@ -30,7 +30,7 @@ class carbon::config {
       group  => $carbon::gr_group,
       mode   => '0644',
       owner  => $carbon::gr_user,
-  #    notify => Service[$carbon_c_relay::service_name]
+      notify => Service[$carbon_c_relay::service_name]
     }
   
     ### create header in carbon.conf
