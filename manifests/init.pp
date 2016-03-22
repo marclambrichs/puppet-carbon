@@ -178,6 +178,16 @@
 #
 # [*cc_manhole_public_key*]
 #
+# [*gr_enable_carbon_cache*]
+#   Whether carbon cache should be enabled to start at boot.
+#   Type: Boolean
+#   Default: true
+#
+# [*gr_ensure_carbon_cache*]
+#   Whether a service should be running.
+#   Type: Boolean
+#   Default: true
+#
 # === Variables
 #
 # === Examples
@@ -247,6 +257,7 @@ class carbon (
   $gr_config_file                        = $carbon::params::gr_config_file,
   $gr_enable_carbon_cache                = $carbon::params::gr_enable_carbon_cache,
   $gr_enable_carbon_relay                = $carbon::params::gr_enable_carbon_relay,
+  $gr_ensure_carbon_cache                = $carbon::params::gr_ensure_carbon_cache,
   $gr_systemd_dir                        = $carbon::params::gr_systemd_dir,
   $gr_twisted_pkg                        = $carbon::params::gr_twisted_pkg,
   $gr_twisted_ver                        = $carbon::params::gr_twisted_ver,
@@ -291,6 +302,7 @@ class carbon (
   validate_re( $cc_whisper_fallocate_create, 'False|True' )
 
   validate_re( $gr_carbon_ver, '^(present|\d+\.\d+\.\d+)$' )
+  validate_re( $gr_ensure_carbon_cache, '^(running|stopped)$')
   validate_re( $gr_twisted_ver, '^(present|\d+\.\d+\.\d+)$' )
   validate_re( $gr_whisper_ver, '^(present|\d+\.\d+\.\d+)$' )
 

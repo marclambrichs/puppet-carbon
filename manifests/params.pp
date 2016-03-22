@@ -91,6 +91,7 @@ class carbon::params {
   $gr_group                              = 'carbon'
   $gr_enable_carbon_cache                = true
   $gr_enable_carbon_relay                = false
+  $gr_ensure_carbon_cache                = running
   $gr_systemd_dir                        = '/usr/lib/systemd/system'
   $gr_twisted_pkg                        = 'python-twisted-core'
   $gr_user                               = 'carbon'
