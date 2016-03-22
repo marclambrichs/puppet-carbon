@@ -11,6 +11,15 @@ class carbon::service {
       require => Concat[$carbon::config_file]
     }
 
+    if empty( $carbon::cc_carbon_caches ) {
+      service { 'carbon-cache':
+        ensure => running,
+        enable => true
+      }
+    } else {
+      carbon::service::instance { keys( $carbon::cc_carbon_caches ): }
+    }
+
   }
 
 }
