@@ -287,6 +287,16 @@ class carbon (
 
   validate_hash( $cc_carbon_caches )
 
+  if $cc_cache_query_backlog {
+    validate_integer($cc_cache_query_backlog)
+  }
+  if $cc_line_receiver_backlog {
+    validate_integer($cc_line_receiver_backlog)
+  }
+  if $cc_pickle_receiver_backlog {
+    validate_integer($cc_pickle_receiver_backlog)
+  }
+
   validate_re( $cc_amqp_metric_name_in_body, 'False|True' )
   validate_re( $cc_amqp_verbose, 'False|True' )
   validate_re( $cc_enable_amqp, 'False|True' )
