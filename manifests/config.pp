@@ -1,6 +1,25 @@
 # == Class carbon::config
-
+#
+#
 class carbon::config {
+
+  ### create config directory
+  file {
+    $carbon::gr_config_dir:
+      ensure => directory,
+      group  => $carbon::gr_group,
+      mode   => '0755',
+      owner  => $carbon::gr_user,
+  }
+
+  ### create data directory
+  file {
+    $carbon::cc_local_data_dir:
+      ensure => directory,
+      group  => $carbon::gr_group,
+      mode   => '0755',
+      owner  => $carbon::gr_user,
+  }
 
   ### create storage-schemas.conf
   file {
@@ -10,6 +29,7 @@ class carbon::config {
       group   => $carbon::gr_group,
       mode    => '0644',
       owner   => $carbon::gr_user,
+      require => File[$carbon::gr_config_dir],
   }
 
   ### create storage-aggregation.conf
@@ -20,6 +40,7 @@ class carbon::config {
       group   => $carbon::gr_group,
       mode    => '0644',
       owner   => $carbon::gr_user,
+      require => File[$carbon::gr_config_dir],
   }
 
   if $carbon::gr_enable_carbon_cache {
@@ -37,7 +58,8 @@ class carbon::config {
     concat::fragment { 'carbon.conf':
       target  => $carbon::config_file,
       order   => '10',
-      content => template("carbon${carbon::gr_config_dir}/carbon.conf.erb")
+      content => template("carbon${carbon::gr_config_dir}/carbon.conf.erb"),
+      require => File[$carbon::gr_config_dir],
     }
 
     ### create [cache:x] fragments in carbon.conf
