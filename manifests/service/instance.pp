@@ -1,7 +1,12 @@
+# == type carbon::service::instance
 #
-define carbon::service::instance (){
+#
+define carbon::service::instance (
+  $ensure,
+  $enable,
+){
   service { "carbon-cache-${title}":
-    ensure => $carbon::gr_ensure_carbon_cache,
-    enable => $carbon::gr_enable_carbon_cache
+    ensure => $ensure,
+    enable => $enable,
   }
 }

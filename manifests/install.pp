@@ -1,32 +1,41 @@
 # == Class carbon::install
 #
 #
-class carbon::install {
+class carbon::install (
+  $carbon_pkg      = $carbon::carbon_pkg,
+  $carbon_version  = $carbon::carbon_version,
+  $group           = $carbon::group,
+  $manage_packages = $carbon::manage_packages,
+  $twisted_pkg     = $carbon::twisted_pkg,
+  $twisted_version = $carbon::twisted_version,
+  $user            = $carbon::user,
+  $whisper_pkg     = $carbon::whisper_pkg,
+  $whisper_version = $carbon::whisper_version,
+){
 
-  group { $carbon::gr_group:
+  group { $carbon::group:
     ensure => present
   } ->
-  user { $carbon::gr_user:
+  user { $carbon::user:
     ensure => present,
-    groups => $carbon::gr_group
+    groups => $carbon::group
   }
 
-  if $::carbon::manage_packages {
+  if $manage_packages {
     create_resources('package', {
       'carbon'  => {
-        ensure => $::carbon::gr_carbon_ver,
-        name   => $::carbon::gr_carbon_pkg,
+        ensure => $carbon_version,
+        name   => $carbon_pkg,
       },
       'twisted' => {
-        ensure => $::carbon::gr_twisted_ver,
-        name   => $::carbon::gr_twisted_pkg,
+        ensure => $twisted_version,
+        name   => $twisted_pkg,
       },
       'whisper' => {
-        ensure => $::carbon::gr_whisper_ver,
-        name   => $::carbon::gr_whisper_pkg,
+        ensure => $whisper_version,
+        name   => $whisper_pkg,
       },
     }
     )
   }
-
 }

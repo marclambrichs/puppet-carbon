@@ -3,41 +3,8 @@
 #
 class carbon::params {
 
-  ### variables for carbon cache
-  $cc_amqp_exchange                      = 'graphite'
-  $cc_amqp_host                          = 'localhost'
-  $cc_amqp_metric_name_in_body           = 'False'
-  $cc_amqp_password                      = 'guest'
-  $cc_amqp_port                          = 5672
-  $cc_amqp_verbose                       = 'False'
-  $cc_amqp_user                          = 'guest'
-  $cc_amqp_vhost                         = '/'
-  $cc_cache_query_backlog                = undef
-  $cc_cache_write_strategy               = 'sorted'
-  $cc_carbon_caches                      = {}
-  $cc_carbon_metric_interval             = 60
-  $cc_carbon_metric_prefix               = 'carbon'
-  $cc_enable_amqp                        = 'False'
-  $cc_enable_logrotation                 = 'False'
-  $cc_enable_manhole                     = 'False'
-  $cc_enable_udp_listener                = 'False'
-  $cc_line_receiver_backlog              = undef
-  $cc_local_data_dir                     = '/var/lib/carbon/whisper'
-  $cc_log_cache_hits                     = 'False'
-  $cc_log_cache_queue_sorts              = 'True'
-  $cc_log_dir                            = '/var/log/carbon'
-  $cc_log_listener_connections           = 'True'
-  $cc_log_updates                        = 'False'
-  $cc_manhole_user                       = 'admin'
-  $cc_manhole_pubic_key                  = undef
-  $cc_max_cache_size                     = 'inf'
-  $cc_max_creates_per_minute             = 50
-  $cc_max_updates_per_second             = 500
-  $cc_max_updates_per_second_on_shutdown = undef
-  $cc_pickle_receiver_backlog            = undef
-  $cc_pid_dir                            = '/var/run'
-  $cc_storage_dir                        = '/var/lib/carbon'
-  $cc_storage_aggregations               = [
+  ### TODO
+  $storage_aggregations               = [
     {
       name => 'min',
       pattern => '\.min$',
@@ -63,7 +30,7 @@ class carbon::params {
       aggregationMethod => 'average'
     },
   ]
-  $cc_storage_schemas                    = [
+  $storage_schemas                    = [
     {
       name       => 'carbon',
       pattern    => '^carbon\.',
@@ -75,36 +42,89 @@ class carbon::params {
       retentions => '60s:1d'
     }
   ]
-  $cc_use_flow_control                   = 'True'
-  $cc_use_insecure_unpickler             = 'False'
-  $cc_use_whitelist                      = undef
-  $cc_whitelists_dir                     = '/var/lib/carbon/lists'
-  $cc_whisper_fallocate_create           = 'True'
-  $cc_whisper_autoflush                  = 'False'
-  $cc_whisper_lock_writes                = undef
-  $cc_whisper_sparse_create              = undef
 
-  ### global variables for cache, relay and aggregator
-  $gr_carbon_pkg                         = 'python-carbon'
-  $gr_config_dir                         = '/etc/carbon'
-  $gr_config_file                        = 'carbon.conf'
-  $gr_group                              = 'carbon'
-  $gr_enable_carbon_cache                = true
-  $gr_enable_carbon_relay                = false
-  $gr_ensure_carbon_cache                = running
-  $gr_systemd_dir                        = '/usr/lib/systemd/system'
-  $gr_twisted_pkg                        = 'python-twisted-core'
-  $gr_user                               = 'carbon'
-  $gr_whisper_pkg                        = 'python-whisper'
-  $manage_packages                       = true
+  ### general
+  $carbon_caches                      = {}
+  $config_dir                         = '/etc/carbon'
+  $enable_carbon_cache                = true
+  $group                              = 'carbon'
+  $user                               = 'carbon'
+  $local_data_dir                     = '/var/lib/carbon/whisper'
+  $systemd_dir                        = '/usr/lib/systemd/system'
 
+  ### carbon::service
+  $ensure_carbon_cache                = running
+
+  ### carbon::config
+  $cache_service_template             = 'carbon-cache.service.erb'
+  $config_filename                    = 'carbon.conf'
+
+  ### carbon::config::cache
+  $amqp_exchange                      = 'graphite'
+  $amqp_host                          = 'localhost'
+  $amqp_metric_name_in_body           = 'False'
+  $amqp_password                      = 'guest'
+  $amqp_port                          = 5672
+  $amqp_verbose                       = 'False'
+  $amqp_user                          = 'guest'
+  $amqp_vhost                         = '/'
+  $bind_patterns                      = undef
+  $cache_query_backlog                = undef
+  $cache_query_interface              = '0.0.0.0'
+  $cache_query_port                   = 7002
+  $cache_template                     = 'carbon/etc/carbon/carbon.conf/cache.erb'
+  $cache_write_strategy               = 'sorted'
+  $carbon_metric_interval             = 60
+  $carbon_metric_prefix               = 'carbon'
+  $enable_amqp                        = 'False'
+  $enable_logrotation                 = 'False'
+  $enable_manhole                     = 'False'
+  $enable_udp_listener                = 'False'
+  $line_receiver_backlog              = undef
+  $line_receiver_interface            = '0.0.0.0'
+  $line_receiver_port                 = 2203
+  $log_cache_hits                     = 'False'
+  $log_cache_queue_sorts              = 'True'
+  $log_dir                            = '/var/log/carbon'
+  $log_listener_connections           = 'True'
+  $log_updates                        = 'False'
+  $manhole_interface                  = undef
+  $manhole_port                       = undef
+  $manhole_public_key                 = undef
+  $manhole_user                       = 'admin'
+  $max_cache_size                     = 'inf'
+  $max_creates_per_minute             = 50
+  $max_updates_per_second             = 500
+  $max_updates_per_second_on_shutdown = undef
+  $pickle_receiver_backlog            = undef
+  $pickle_receiver_interface          = '0.0.0.0'
+  $pickle_receiver_port               = 2204
+  $pid_dir                            = '/var/run'
+  $storage_dir                        = '/var/lib/carbon'
+  $udp_receiver_interface             = '0.0.0.0'
+  $udp_receiver_port                  = 2203
+  $use_flow_control                   = 'True'
+  $use_insecure_unpickler             = 'False'
+  $use_whitelist                      = undef
+  $whisper_autoflush                  = 'False'
+  $whisper_fallocate_create           = 'True'
+  $whisper_lock_writes                = undef
+  $whisper_sparse_create              = undef
+  $whitelists_dir                     = '/var/lib/carbon/lists'
+  ### end carbon::config::cache variables.
+
+  ### carbon::install
+  $carbon_pkg                         = 'python-carbon'
+  $manage_packages                    = true
+  $twisted_pkg                        = 'python-twisted-core'
+  $whisper_pkg                        = 'python-whisper'
   case $::osfamily {
     'RedHat', 'CentOS': {
       case $::operatingsystemmajrelease {
         /^7$/: {
-          $gr_carbon_ver   = 'present'
-          $gr_twisted_ver  = 'present'
-          $gr_whisper_ver  = 'present'
+          $carbon_version   = 'present'
+          $twisted_version  = 'present'
+          $whisper_version  = 'present'
         }
         default: {
           fail("unsupported RedHat major release: ${::operatingsystemmajrelease}")

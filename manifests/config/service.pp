@@ -1,11 +1,16 @@
+# == type carbon::config::service
 #
-define carbon::config::service () {
+#
+define carbon::config::service (
+  $template,
+  $systemd_dir,
+) {
   file { "carbon-cache-${title}.service":
     ensure  => file,
-    content => template('carbon/usr/lib/systemd/system/carbon-cache.service.erb'),
+    content => template("carbon${systemd_dir}/${template}"),
     group   => 'root',
     mode    => '0644',
     owner   => 'root',
-    path    => "/usr/lib/systemd/system/carbon-cache-${title}.service",
+    path    => "${systemd_dir}/carbon-cache-${title}.service",
   }
 }

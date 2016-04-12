@@ -13,7 +13,7 @@
 #  xFilesFactor: Ratio of valid data points required for aggregation to the next retention to occur
 #  aggregationMethod: function to apply to data points for aggregation
 #
-<% scope.lookupvar('carbon::cc_storage_aggregations').each do |aggregation| %>
+<% @storage_aggregations.each do |aggregation| %>
 [<%= aggregation['name'] %>]
 pattern = <%= aggregation['pattern'] %>
 xFilesFactor = <%= aggregation['xFilesFactor'] %>

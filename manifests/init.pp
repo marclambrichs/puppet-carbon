@@ -202,131 +202,152 @@
 #
 # === Copyright
 #
-# Copyright 2016 Melange IT B.V.
 #
 class carbon (
-  $cc_amqp_exchange                      = $carbon::params::cc_amqp_exchange,
-  $cc_amqp_host                          = $carbon::params::cc_amqp_host,
-  $cc_amqp_metric_name_in_body           = $carbon::params::cc_amqp_metric_name_in_body,
-  $cc_amqp_port                          = $carbon::params::cc_amqp_port,
-  $cc_amqp_verbose                       = $carbon::params::cc_amqp_verbose,
-  $cc_amqp_user                          = $carbon::params::cc_amqp_user,
-  $cc_amqp_vhost                         = $carbon::params::cc_amqp_vhost,
-  $cc_bind_patterns                      = $carbon::params::cc_bind_patterns,
-  $cc_cache_query_backlog                = $carbon::params::cc_cache_query_backlog,
-  $cc_cache_query_interface              = $carbon::params::cc_cache_query_interface,
-  $cc_cache_write_strategy               = $carbon::params::cc_cache_write_strategy,
-  $cc_carbon_caches                      = $carbon::params::cc_carbon_caches,
-  $cc_carbon_metric_interval             = $carbon::params::cc_carbon_metric_interval,
-  $cc_carbon_metric_prefix               = $carbon::params::cc_carbon_metric_prefix,
-  $cc_enable_amqp                        = $carbon::params::cc_enable_amqp,
-  $cc_enable_logrotation                 = $carbon::params::cc_enable_logrotation,
-  $cc_enable_manhole                     = $carbon::params::cc_enable_manhole,
-  $cc_enable_udp_listener                = $carbon::params::cc_enable_udp_listener,
-  $cc_line_receiver_backlog              = $carbon::params::cc_line_receiver_backlog,
-  $cc_local_data_dir                     = $carbon::params::cc_local_data_dir,
-  $cc_log_cache_hits                     = $carbon::params::cc_log_cache_hits,
-  $cc_log_cache_queue_sorts              = $carbon::params::cc_log_cache_queue_sorts,
-  $cc_log_dir                            = $carbon::params::cc_log_dir,
-  $cc_log_listener_connections           = $carbon::params::cc_log_listener_connections,
-  $cc_log_updates                        = $carbon::params::cc_log_updates,
-  $cc_manhole_interface                  = $carbon::params::cc_manhole_interface,
-  $cc_manhole_port                       = $carbon::params::cc_manhole_port,
-  $cc_manhole_user                       = $carbon::params::cc_manhole_user,
-  $cc_manhole_public_key                 = $carbon::params::cc_manhole_public_key,
-  $cc_max_cache_size                     = $carbon::params::cc_max_cache_size,
-  $cc_max_creates_per_minute             = $carbon::params::cc_max_creates_per_minute,
-  $cc_max_updates_per_second             = $carbon::params::cc_max_updates_per_second,
-  $cc_max_updates_per_second_on_shutdown = $carbon::params::cc_max_updates_per_second_on_shutdown,
-  $cc_pickle_receiver_backlog            = $carbon::params::cc_pickle_receiver_backlog,
-  $cc_pid_dir                            = $carbon::params::cc_pid_dir,
-  $cc_storage_aggregations               = $carbon::params::cc_storage_aggregations,
-  $cc_storage_dir                        = $carbon::params::cc_storage_dir,
-  $cc_storage_schemas                    = $carbon::params::cc_storage_schemas,
-  $cc_use_flow_control                   = $carbon::params::cc_use_flow_control,
-  $cc_use_insecure_unpickler             = $carbon::params::cc_use_insecure_unpickler,
-  $cc_use_whitelist                      = $carbon::params::cc_use_whitelist,
-  $cc_whisper_autoflush                  = $carbon::params::cc_whisper_autoflush,
-  $cc_whisper_fallocate_create           = $carbon::params::cc_whisper_fallocate_create,
-  $cc_whisper_lock_writes                = $carbon::params::cc_whisper_lock_writes,
-  $cc_whisper_sparse_create              = $carbon::params::cc_whisper_sparse_create,
-  $cc_whitelists_dir                     = $carbon::params::cc_whitelists_dir,
-  $gr_carbon_ver                         = $carbon::params::gr_carbon_ver,
-  $gr_carbon_pkg                         = $carbon::params::gr_carbon_pkg,
-  $gr_config_dir                         = $carbon::params::gr_config_dir,
-  $gr_config_file                        = $carbon::params::gr_config_file,
-  $gr_enable_carbon_cache                = $carbon::params::gr_enable_carbon_cache,
-  $gr_enable_carbon_relay                = $carbon::params::gr_enable_carbon_relay,
-  $gr_ensure_carbon_cache                = $carbon::params::gr_ensure_carbon_cache,
-  $gr_systemd_dir                        = $carbon::params::gr_systemd_dir,
-  $gr_twisted_pkg                        = $carbon::params::gr_twisted_pkg,
-  $gr_twisted_ver                        = $carbon::params::gr_twisted_ver,
-  $gr_user                               = $carbon::params::gr_user,
-  $gr_whisper_pkg                        = $carbon::params::gr_whisper_pkg,
-  $gr_whisper_ver                        = $carbon::params::gr_whisper_ver,
-  $manage_packages                       = $carbon::params::manage_packages,
+  ### general
+  $carbon_caches                      = $carbon::params::carbon_caches,
+  $config_dir                         = $carbon::params::config_dir,
+  $enable_carbon_cache                = $carbon::params::enable_carbon_cache,
+  $group                              = $carbon::params::group,
+  $user                               = $carbon::params::user,
+  $local_data_dir                     = $carbon::params::local_data_dir,
+  $systemd_dir                        = $carbon::params::systemd_dir,
+
+  ### carbon::service
+  $ensure_carbon_cacheg                = $carbon::params::ensure_carbon_cache,
+
+  ### carbon::config
+  $cache_service_template             = $carbon::params::cache_service_template,
+  $config_filename                    = $carbon::params::config_filename,
+  $cc_storage_aggregations            = $carbon::cc_storage_aggregations,
+  $cc_storage_schemas                 = $carbon::cc_storage_schemas,
+
+  ### carbon::config::cache variables
+  $amqp_exchange                      = $carbon::params::amqp_exchange,
+  $amqp_host                          = $carbon::params::amqp_host,
+  $amqp_metric_name_in_body           = $carbon::params::amqp_metric_name_in_body,
+  $amqp_password                      = $carbon::params::amqp_password,
+  $amqp_port                          = $carbon::params::amqp_port,
+  $amqp_user                          = $carbon::params::amqp_user,
+  $amqp_verbose                       = $carbon::params::amqp_verbose,
+  $amqp_vhost                         = $carbon::params::amqp_vhost,
+  $bind_patterns                      = $carbon::params::bind_patterns,
+  $cache_query_backlog                = $carbon::params::cache_query_backlog,
+  $cache_query_interface              = $carbon::params::cache_query_interface,
+  $cache_query_port                   = $carbon::params::cache_query_port,
+  $cache_template                     = $carbon::params::cache_template,
+  $cache_write_strategy               = $carbon::params::cache_write_strategy,
+  $carbon_metric_interval             = $carbon::params::carbon_metric_interval,
+  $carbon_metric_prefix               = $carbon::params::carbon_metric_prefix,
+  $enable_amqp                        = $carbon::params::enable_amqp,
+  $enable_logrotation                 = $carbon::params::enable_logrotation,
+  $enable_manhole                     = $carbon::params::enable_manhole,
+  $enable_udp_listener                = $carbon::params::enable_udp_listener,
+  $line_receiver_backlog              = $carbon::params::line_receiver_backlog,
+  $line_receiver_interface            = $carbon::params::line_receiver_interface,
+  $line_receiver_port                 = $carbon::params::line_receiver_port,
+  $log_cache_hits                     = $carbon::params::log_cache_hits,
+  $log_cache_queue_sorts              = $carbon::params::log_cache_queue_sorts,
+  $log_dir                            = $carbon::params::log_dir,
+  $log_listener_connections           = $carbon::params::log_listener_connections,
+  $log_updates                        = $carbon::params::log_updates,
+  $manhole_interface                  = $carbon::params::manhole_interface,
+  $manhole_port                       = $carbon::params::manhole_port,
+  $manhole_public_key                 = $carbon::params::manhole_public_key,
+  $manhole_user                       = $carbon::params::manhole_user,
+  $max_cache_size                     = $carbon::params::max_cache_size,
+  $max_creates_per_minute             = $carbon::params::max_creates_per_minute,
+  $max_updates_per_second             = $carbon::params::max_updates_per_second,
+  $max_updates_per_second_on_shutdown = $carbon::params::max_updates_per_second_on_shutdown,
+  $pickle_receiver_backlog            = $carbon::params::pickle_receiver_backlog,
+  $pickle_receiver_interface          = $carbon::params::pickle_receiver_interface,
+  $pickle_receiver_port               = $carbon::params::pickle_receiver_port,
+  $pid_dir                            = $carbon::params::pid_dir,
+  $storage_dir                        = $carbon::params::storage_dir,
+  $storage_aggregations               = $carbon::params::storage_aggregations,
+  $storage_schemas                    = $carbon::params::storage_schemas,
+  $udp_receiver_interface             = $carbon::params::udp_receiver_interface,
+  $udp_receiver_port                  = $carbon::params::udp_receiver_port,
+  $use_flow_control                   = $carbon::params::use_flow_control,
+  $use_insecure_unpickler             = $carbon::params::use_insecure_unpickler,
+  $use_whitelist                      = $carbon::params::use_whitelist,
+  $whisper_autoflush                  = $carbon::params::whisper_autoflush,
+  $whisper_fallocate_create           = $carbon::params::whisper_fallocate_create,
+  $whisper_lock_writes                = $carbon::params::whisper_lock_writes,
+  $whisper_sparse_create              = $carbon::params::whisper_sparse_create,
+  $whitelists_dir                     = $carbon::params::whitelists_dir,
+  ### end carbon::config::cache variables.
+
+  ### carbon::install
+  $carbon_pkg                         = $carbon::carbon_pkg,
+  $carbon_version                     = $carbon::params::carbon_version,
+  $manage_packages                    = $carbon::manage_packages,
+  $twisted_pkg                        = $carbon::twisted_pkg,
+  $twisted_version                    = $carbon::params::twisted_version,
+  $whisper_pkg                        = $carbon::whisper_pkg,
+  $whisper_version                    = $carbon::params::whisper_version,
 ) inherits carbon::params {
 
-  $config_file = "${gr_config_dir}/${gr_config_file}"
+  ### define complete path config file
+  $config_file = "${config_dir}/${config_file}"
 
-  validate_absolute_path( $gr_config_dir )
-  validate_absolute_path( $gr_systemd_dir )
-  validate_absolute_path( $cc_local_data_dir )
-  validate_absolute_path( $cc_log_dir )
-  validate_absolute_path( $cc_pid_dir )
-  validate_absolute_path( $cc_storage_dir )
-  validate_absolute_path( $cc_whitelists_dir )
+  validate_absolute_path( $config_dir )
+  validate_absolute_path( $systemd_dir )
+  validate_absolute_path( $local_data_dir )
+  validate_absolute_path( $log_dir )
+  validate_absolute_path( $pid_dir )
+  validate_absolute_path( $storage_dir )
+  validate_absolute_path( $whitelists_dir )
 
-  validate_array( $cc_storage_aggregations )
-  validate_array( $cc_storage_schemas )
+  validate_array( $storage_aggregations )
+  validate_array( $storage_schemas )
 
   validate_bool (
-    $gr_enable_carbon_relay,
     $manage_packages
   )
 
-  validate_hash( $cc_carbon_caches )
+  validate_hash( $carbon_caches )
 
-  if $cc_cache_query_backlog {
-    validate_integer($cc_cache_query_backlog)
+  if $cache_query_backlog {
+    validate_integer($cache_query_backlog)
   }
-  if $cc_line_receiver_backlog {
-    validate_integer($cc_line_receiver_backlog)
+  if $line_receiver_backlog {
+    validate_integer($line_receiver_backlog)
   }
-  if $cc_pickle_receiver_backlog {
-    validate_integer($cc_pickle_receiver_backlog)
+  if $pickle_receiver_backlog {
+    validate_integer($pickle_receiver_backlog)
   }
 
-  validate_re( $cc_amqp_metric_name_in_body, 'False|True' )
-  validate_re( $cc_amqp_verbose, 'False|True' )
-  validate_re( $cc_enable_amqp, 'False|True' )
-  validate_re( $cc_enable_logrotation, 'False|True' )
-  validate_re( $cc_enable_udp_listener, 'False|True' )
-  validate_re( $cc_log_cache_hits, 'False|True' )
-  validate_re( $cc_log_cache_queue_sorts, 'False|True' )
-  validate_re( $cc_log_listener_connections, 'False|True' )
-  validate_re( $cc_log_updates, 'False|True' )
-  validate_re( $cc_use_flow_control, 'False|True' )
-  validate_re( $cc_use_insecure_unpickler, 'False|True' )
-  validate_re( $cc_whisper_autoflush, 'False|True' )
-  validate_re( $cc_whisper_fallocate_create, 'False|True' )
+  validate_re( $amqp_metric_name_in_body, 'False|True' )
+  validate_re( $amqp_verbose, 'False|True' )
+  validate_re( $enable_amqp, 'False|True' )
+  validate_re( $enable_logrotation, 'False|True' )
+  validate_re( $enable_udp_listener, 'False|True' )
+  validate_re( $log_cache_hits, 'False|True' )
+  validate_re( $log_cache_queue_sorts, 'False|True' )
+  validate_re( $log_listener_connections, 'False|True' )
+  validate_re( $log_updates, 'False|True' )
+  validate_re( $use_flow_control, 'False|True' )
+  validate_re( $use_insecure_unpickler, 'False|True' )
+  validate_re( $whisper_autoflush, 'False|True' )
+  validate_re( $whisper_fallocate_create, 'False|True' )
 
-  validate_re( $gr_carbon_ver, '^(present|\d+\.\d+\.\d+)$' )
-  validate_re( $gr_ensure_carbon_cache, '^(running|stopped)$')
-  validate_re( $gr_twisted_ver, '^(present|\d+\.\d+\.\d+)$' )
-  validate_re( $gr_whisper_ver, '^(present|\d+\.\d+\.\d+)$' )
+  validate_re( $carbon_version, '^(present|\d+\.\d+\.\d+)$' )
+  validate_re( $ensure_carbon_cache, '^(running|stopped)$')
+  validate_re( $twisted_version, '^(present|\d+\.\d+\.\d+)$' )
+  validate_re( $whisper_version, '^(present|\d+\.\d+\.\d+)$' )
 
   validate_string(
-    $cc_amqp_exchange,
-    $cc_amqp_host,
-    $cc_amqp_user,
-    $cc_cache_write_strategy,
-    $cc_carbon_metric_prefix,
-    $gr_carbon_pkg,
-    $gr_config_file,
-    $gr_twisted_pkg,
-    $gr_user,
-    $gr_whisper_pkg
+    $amqp_exchange,
+    $amqp_host,
+    $amqp_user,
+    $cache_write_strategy,
+    $carbon_metric_prefix,
+    $carbon_pkg,
+    $config_file,
+    $twisted_pkg,
+    $user,
+    $whisper_pkg
   )
 
   anchor { 'carbon::begin': } ->
