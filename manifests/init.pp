@@ -214,7 +214,7 @@ class carbon (
   $systemd_dir                        = $carbon::params::systemd_dir,
 
   ### carbon::service
-  $ensure_carbon_cacheg               = $carbon::params::ensure_carbon_cache,
+  $ensure_carbon_cache                = $carbon::params::ensure_carbon_cache,
 
   ### carbon::config
   $cache_service_template             = $carbon::params::cache_service_template,
@@ -264,8 +264,6 @@ class carbon (
   $pickle_receiver_port               = $carbon::params::pickle_receiver_port,
   $pid_dir                            = $carbon::params::pid_dir,
   $storage_dir                        = $carbon::params::storage_dir,
-  $storage_aggregations               = $carbon::params::storage_aggregations,
-  $storage_schemas                    = $carbon::params::storage_schemas,
   $udp_receiver_interface             = $carbon::params::udp_receiver_interface,
   $udp_receiver_port                  = $carbon::params::udp_receiver_port,
   $use_flow_control                   = $carbon::params::use_flow_control,
