@@ -287,7 +287,7 @@ class carbon (
 ) inherits carbon::params {
 
   ### define complete path config file
-  $config_file = "${config_dir}/${config_file}"
+  $config_file = "${config_dir}/${config_filename}"
 
   validate_absolute_path( $config_dir )
   validate_absolute_path( $systemd_dir )
