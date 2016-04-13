@@ -185,7 +185,7 @@ class carbon::config (
 
     ### create [cache:x] fragments in carbon.conf
     if empty( $carbon_caches ) {
-      create_resources( 'carbon::config::cache', { a => undef } )
+      create_resources( 'carbon::config::cache', { a => undef }, $cache_defaults )
     } else {
       create_resources( 'carbon::config::cache', $carbon_caches, $cache_defaults )
     }
