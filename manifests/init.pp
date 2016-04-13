@@ -214,13 +214,13 @@ class carbon (
   $systemd_dir                        = $carbon::params::systemd_dir,
 
   ### carbon::service
-  $ensure_carbon_cacheg                = $carbon::params::ensure_carbon_cache,
+  $ensure_carbon_cacheg               = $carbon::params::ensure_carbon_cache,
 
   ### carbon::config
   $cache_service_template             = $carbon::params::cache_service_template,
   $config_filename                    = $carbon::params::config_filename,
-  $cc_storage_aggregations            = $carbon::cc_storage_aggregations,
-  $cc_storage_schemas                 = $carbon::cc_storage_schemas,
+  $storage_aggregations               = $carbon::params::storage_aggregations,
+  $storage_schemas                    = $carbon::params::storage_schemas,
 
   ### carbon::config::cache variables
   $amqp_exchange                      = $carbon::params::amqp_exchange,
@@ -279,12 +279,12 @@ class carbon (
   ### end carbon::config::cache variables.
 
   ### carbon::install
-  $carbon_pkg                         = $carbon::carbon_pkg,
+  $carbon_pkg                         = $carbon::params::carbon_pkg,
   $carbon_version                     = $carbon::params::carbon_version,
-  $manage_packages                    = $carbon::manage_packages,
-  $twisted_pkg                        = $carbon::twisted_pkg,
+  $manage_packages                    = $carbon::params::manage_packages,
+  $twisted_pkg                        = $carbon::params::twisted_pkg,
   $twisted_version                    = $carbon::params::twisted_version,
-  $whisper_pkg                        = $carbon::whisper_pkg,
+  $whisper_pkg                        = $carbon::params::whisper_pkg,
   $whisper_version                    = $carbon::params::whisper_version,
 ) inherits carbon::params {
 
