@@ -30,7 +30,7 @@ LINE_RECEIVER_BACKLOG              = <%= @line_receiver_backlog %>
 <% end -%>
 LINE_RECEIVER_INTERFACE            = <%= @line_receiver_interface %>
 LINE_RECEIVER_PORT                 = <%= @line_receiver_port %>
-<% if @cc_local_data_dir -%>
+<% if @local_data_dir -%>
 LOCAL_DATA_DIR                     = <%= @local_data_dir %>/
 <% end -%>
 LOG_CACHE_HITS                     = <%= @log_cache_hits %>
@@ -38,7 +38,7 @@ LOG_CACHE_QUEUE_SORTS              = <%= @log_cache_queue_sorts %>
 LOG_DIR                            = <%= @log_dir %>/
 LOG_LISTENER_CONNECTIONS           = <%= @log_listener_connections %>
 LOG_UPDATES                        = <%= @log_updates %>
-<% if @cc_enable_manhole == "True" -%>
+<% if @enable_manhole == "True" -%>
 MANHOLE_INTERFACE                  = <%= @manhole_interface %>
 MANHOLE_PORT                       = <%= @manhole_port %>
 MANHOLE_USER                       = <%= @manhole_user %>
