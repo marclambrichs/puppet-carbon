@@ -121,7 +121,7 @@ class carbon::config (
     concat::fragment { $config_filename:
       target  => $config_file,
       order   => '10',
-      content => template("carbon${config_dir}/carbon.conf.erb"),
+      content => file("carbon${config_dir}/carbon.conf"),
       require => File[$config_dir],
     }
 
