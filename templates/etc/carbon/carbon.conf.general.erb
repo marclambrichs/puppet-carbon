@@ -1,0 +1,126 @@
+# ==============================================================================
+# carbon.conf - Managed by Puppet
+# ==============================================================================
+
+[cache]
+# Configure carbon directories.
+AMQP_EXCHANGE				= <%= @amqp_exchange %>
+AMQP_HOST				= <%= @amqp_host %>
+AMQP_METRIC_NAME_IN_BODY		= <%= @amqp_metric_name_in_body %>
+AMQP_PASSWORD				= <%= @amqp_password %>
+AMQP_PORT				= <%= @amqp_port %>
+AMQP_USER				= <%= @amqp_user %>
+AMQP_VERBOSE				= <%= @amqp_verbose %>
+AMQP_VHOST				= <%= @amqp_vhost %>
+CACHE_QUERY_INTERFACE			= <%= @cache_query_interface %>
+CACHE_WRITE_STRATEGY			= <%= @cache_write_strategy %>
+CARBON_METRIC_INTERVAL			= <%= @carbon_metric_interval %>
+CARBON_METRIC_PREFIX			= <%= @carbon_metric_prefix %>
+CONF_DIR				= <%= @config_dir %>
+DATABASE				= <%= @database %>
+ENABLE_AMQP				= <%= @enable_amqp %>
+ENABLE_LOGROTATION			= <%= @enable_log_rotation %>
+ENABLE_UDP_LISTENER			= <%= @udp_listener_enabled %>
+LINE_RECEIVER_INTERFACE			= <%= @line_receiver_interface %>
+LOCAL_DATA_DIR				= <%= @storage_dir %>/<%= @database %>
+LOG_CACHE_HITS				= <%= @log_cache_hits %>
+LOG_CACHE_QUEUE_SORTS			= <%= @log_cache_queue_sorts %>
+LOG_CREATES				= <%= @log_creates %>
+LOG_DIR					= <%= @log_dir %>
+LOG_UPDATES				= <%= @log_updates %>
+MAX_CACHE_SIZE				= <%= @max_cache_size %>
+MAX_CREATES_PER_MINUTE			= <%= @max_creates_per_minute %>
+MAX_RECEIVER_CONNECTIONS		= <%= @max_receiver_connections %>
+MAX_UPDATES_PER_SECOND			= <%= @max_updates_per_second %>
+<% if @max_updates_per_second_on_shutdown -%>
+MAX_UPDATES_PER_SECOND_ON_SHUTDOWN	= <%= @max_updates_per_second_on_shutdown %>
+<% end -%>
+METRIC_CLIENT_IDLE_TIMEOUT		= <%= @metric_client_idle_timeout %>
+MIN_TIMESTAMP_RESOLUTION		= <%= @min_timestamp_resolution %>
+PICKLE_RECEIVER_INTERFACE		= <%= @pickle_receiver_interface %>
+PID_DIR					= <%= @pid_dir %>
+PROTOBUF_RECEIVER_INTERFACE		= <%= @protobuf_receiver_interface %>
+STORAGE_DIR				= <%= @storage_dir %>
+UDP_RECEIVER_INTERFACE			= <%= @udp_receiver_interface %>
+USER					= <%= @user %>
+USE_FLOW_CONTROL			= <%= @use_flow_control %>
+USE_INSECURE_UNPICKLER			= <%= @use_insecure_unpickler %>
+USE_WHITELIST				= <%= @use_whitelist %>
+WHISPER_AUTOFLUSH			= <%= @whisper_autoflush %>
+WHISPER_FADVISE_RANDOM			= <%= @whisper_fadvise_random %>
+WHISPER_FALLOCATE_CREATE		= <%= @whisper_fallocate_create %>
+WHISPER_LOCK_WRITES			= <%= @whisper_lock_writes %>
+WHISPER_SPARSE_CREATE			= <%= @whisper_sparse_create %>
+<% if @database == "ceres" -%>
+# By default all nodes stored in Ceres are cached in memory to improve the
+# throughput of reads and writes to underlying slices. Turning this off will
+# greatly reduce memory consumption for databases with millions of metrics, at
+# the cost of a steep increase in disk i/o, approximately an extra two os.stat
+# calls for every read and write. Reasons to do this are if the underlying
+# storage can handle stat() with practically zero cost (SSD, NVMe, zRAM).
+# Valid values are:
+#       all - all nodes are cached
+#      none - node caching is disabled
+# CERES_NODE_CACHING_BEHAVIOR		= all
+
+# Ceres nodes can have many slices and caching the right ones can improve
+# performance dramatically. Note that there are many trade-offs to tinkering
+# with this, and unless you are a ceres developer you *really* should not
+# mess with this. Valid values are:
+#    latest - only the most recent slice is cached
+#       all - all slices are cached
+#      none - slice caching is disabled
+# CERES_SLICE_CACHING_BEHAVIOR		= latest
+
+# If a Ceres node accumulates too many slices, performance can suffer.
+# This can be caused by intermittently reported data. To mitigate
+# slice fragmentation there is a tolerance for how much space can be
+# wasted within a slice file to avoid creating a new one. That tolerance
+# level is determined by MAX_SLICE_GAP, which is the number of consecutive
+# null datapoints allowed in a slice file.
+# If you set this very low, you will waste less of the *tiny* bit disk space
+# that this feature wastes, and you will be prone to performance problems
+# caused by slice fragmentation, which can be pretty severe.
+# If you set this really high, you will waste a bit more disk space (each
+# null datapoint wastes 8 bytes, but keep in mind your filesystem's block
+# size). If you suffer slice fragmentation issues, you should increase this or
+# run the ceres-maintenance defrag plugin more often. However you should not
+# set it to be huge because then if a large but allowed gap occurs it has to
+# get filled in, which means instead of a simple 8-byte write to a new file we
+# could end up doing an (8 * MAX_SLICE_GAP)-byte write to the latest slice.
+# CERES_MAX_SLICE_GAP			= 80
+
+# Enabling this option will cause Ceres to lock each Ceres file it writes to
+# to with an exclusive lock (LOCK_EX, see: man 2 flock). This is useful when
+# multiple carbon-cache daemons are writing to the same files.
+# CERES_LOCK_WRITES			= False
+
+# Set this to True to enable whitelisting and blacklisting of metrics in
+# CONF_DIR/whitelist.conf and CONF_DIR/blacklist.conf. If the whitelist is
+# missing or empty, all metrics will pass through
+
+# The manhole interface allows you to SSH into the carbon daemon
+# and get a python interpreter. BE CAREFUL WITH THIS! If you do
+# something like time.sleep() in the interpreter, the whole process
+# will sleep! This is *extremely* helpful in debugging, assuming
+# you are familiar with the code. If you are not, please don't
+# mess with this, you are asking for trouble :)
+#
+<% end -%>
+
+ENABLE_MANHOLE				= <%= @enable_manhole %>
+<% if @enable_manhole != "False" -%>
+# MANHOLE_INTERFACE			= 127.0.0.1
+# MANHOLE_PORT				= 7222
+# MANHOLE_USER				= admin
+# MANHOLE_PUBLIC_KEY			= ssh-rsa AAAAB3NzaC1yc2EAAAABiwAaAIEAoxN0sv/e4eZCPpi3N3KYvyzRaBaMeS2RsOQ/cDuKv11dlNzVeiyc3RFmCv5Rjwn/lQ79y0zyHxw67qLyhQ/kDzINc4cY41ivuQXm2tPmgvexdrBv5nsfEpjs3gLZfJnyvlcVyWK/lId8WUvEWSWHTzsbtmXAF2raJMdgLTbQ8wE=
+<% end -%>
+
+# Patterns for all of the metrics this machine will store. Read more at
+# http://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol#Bindings
+#
+# Example: store all sales, linux servers, and utilization metrics
+# BIND_PATTERNS				= sales.#, servers.linux.#, #.utilization
+#
+# Example: store everything
+# BIND_PATTERNS				= #

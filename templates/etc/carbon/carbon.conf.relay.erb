@@ -1,0 +1,33 @@
+
+[relay]
+CARBON_METRIC_INTERVAL		 = <%= @carbon_metric_interval %>
+CARBON_METRIC_PREFIX		 = <%= @carbon_metric_prefix %>
+DESTINATIONS			 = <%= @carbon_caches.keys().map{ |cache| "#{@pickle_receiver_interface}:#{@carbon_caches[cache]['pickle_receiver_port']}:#{cache}" }.join( ", ") %>
+DESTINATION_PROTOCOL		 = <%= @destination_protocol %>
+<% if @replication_factor >= 2 -%>
+DIVERSE_REPLICAS		 = True
+<% end -%>
+LINE_RECEIVER_INTERFACE		 = <%= @line_receiver_interface %>
+LINE_RECEIVER_PORT		 = <%= @line_receiver_port %>
+LOG_LISTENER_CONN_SUCCESS	 = <%= @log_listener_conn_success %>
+MAX_DATAPOINTS_PER_MESSAGE	 = <%= @max_datapoints_per_message %>
+MAX_QUEUE_SIZE			 = <%= @max_queue_size %>
+MAX_RECEIVER_CONNECTIONS	 = <%= @max_receiver_connections %>
+<% if @metric_client_idle_timeout -%>
+METRIC_CLIENT_IDLE_TIMEOUT	 = <%= @metric_client_idle_timeout %>
+<% end -%>
+MIN_RESET_INTERVAL		 = <%= @min_reset_interval %>
+MIN_RESET_RATIO			 = <%= @min_reset_ratio %>
+MIN_RESET_STAT_FLOW		 = <%= @min_reset_stat_flow %>
+PICKLE_RECEIVER_INTERFACE	 = <%= @pickle_receiver_interface %>
+PICKLE_RECEIVER_PORT		 = <%= @pickle_receiver_port %>
+QUEUE_LOW_WATERMARK_PCT		 = <%= @queue_low_watermark_pct %>
+RELAY_METHOD			 = <%= @relay_method %>
+REPLICATION_FACTOR		 = <%= @replication_factor %>
+TIME_TO_DEFER_SENDING		 = <%= @time_to_defer_sending %>
+USE_FLOW_CONTROL		 = <%= @use_flow_control %>
+USE_RATIO_RESET			 = <%= @use_ratio_reset %>
+USE_WHITELIST			 = <%= @use_whitelist %>
+<% if @relay_user -%>
+USER				 = <%= @relay_user %>
+<% end -%>

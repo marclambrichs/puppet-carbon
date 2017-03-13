@@ -1,0 +1,12 @@
+
+[cache:<%= @title -%>]
+CACHE_QUERY_PORT	= <%= @cache_query_port %>
+LINE_RECEIVER_PORT	= <%= @line_receiver_port %>
+PICKLE_RECEIVER_PORT	= <%= @pickle_receiver_port %>
+<% if @protobuf_receiver_enabled -%>
+PROTOBUF_RECEIVER_PORT	= <%= @protobuf_receiver_port %>
+<% else -%>
+PROTOBUF_RECEIVER_PORT	= 0
+<% end -%>
+ENABLE_UDP_LISTENER     = <%= @udp_listener_enabled %>
+UDP_RECEIVER_PORT	= <%= @udp_receiver_port %>

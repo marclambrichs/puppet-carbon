@@ -1,206 +1,127 @@
-# == Class carbon::config
-#
-#
 class carbon::config (
-  $amqp_exchange                      = $carbon::amqp_exchange,
-  $amqp_host                          = $carbon::amqp_host,
-  $amqp_metric_name_in_body           = $carbon::amqp_metric_name_in_body,
-  $amqp_password                      = $carbon::amqp_password,
-  $amqp_port                          = $carbon::amqp_port,
-  $amqp_user                          = $carbon::amqp_user,
-  $amqp_verbose                       = $carbon::amqp_verbose,
-  $amqp_vhost                         = $carbon::amqp_vhost,
-  $bind_patterns                      = $carbon::bind_patterns,
-  $cache_query_backlog                = $carbon::cache_query_backlog,
-  $cache_query_interface              = $carbon::cache_query_interface,
-  $cache_query_port                   = $carbon::cache_query_port,
-  $cache_service_template             = $carbon::cache_service_template,
-  $cache_template                     = $carbon::cache_template,
-  $cache_write_strategy               = $carbon::cache_write_strategy,
-  $carbon_caches                      = $carbon::carbon_caches,
-  $carbon_metric_interval             = $carbon::carbon_metric_interval,
-  $carbon_metric_prefix               = $carbon::carbon_metric_prefix,
-  $config_dir                         = $carbon::config_dir,
-  $config_file                        = $carbon::config_file,
-  $config_filename                    = $carbon::config_filename,
-  $enable_amqp                        = $carbon::enable_amqp,
-  $enable_carbon_cache                = $carbon::enable_carbon_cache,
-  $enable_logrotation                 = $carbon::enable_logrotation,
-  $enable_manhole                     = $carbon::enable_manhole,
-  $enable_udp_listener                = $carbon::enable_udp_listener,
-  $group                              = $carbon::group,
-  $line_receiver_backlog              = $carbon::line_receiver_backlog,
-  $line_receiver_interface            = $carbon::line_receiver_interface,
-  $line_receiver_port                 = $carbon::line_receiver_port,
-  $local_data_dir                     = $carbon::local_data_dir,
-  $log_cache_hits                     = $carbon::log_cache_hits,
-  $log_cache_queue_sorts              = $carbon::log_cache_queue_sorts,
-  $log_dir                            = $carbon::log_dir,
-  $log_listener_connections           = $carbon::log_listener_connections,
-  $log_updates                        = $carbon::log_updates,
-  $manhole_interface                  = $carbon::manhole_interface,
-  $manhole_port                       = $carbon::manhole_port,
-  $manhole_public_key                 = $carbon::manhole_public_key,
-  $manhole_user                       = $carbon::manhole_user,
-  $max_cache_size                     = $carbon::max_cache_size,
-  $max_creates_per_minute             = $carbon::max_creates_per_minute,
-  $max_updates_per_second             = $carbon::max_updates_per_second,
-  $max_updates_per_second_on_shutdown = $carbon::max_updates_per_second_on_shutdown,
-  $pickle_receiver_backlog            = $carbon::pickle_receiver_backlog,
-  $pickle_receiver_interface          = $carbon::pickle_receiver_interface,
-  $pickle_receiver_port               = $carbon::pickle_receiver_port,
-  $pid_dir                            = $carbon::pid_dir,
-  $storage_dir                        = $carbon::storage_dir,
-  $storage_aggregations               = $carbon::storage_aggregations,
-  $storage_schemas                    = $carbon::storage_schemas,
-  $systemd_dir                        = $carbon::systemd_dir,
-  $udp_receiver_interface             = $carbon::udp_receiver_interface,
-  $udp_receiver_port                  = $carbon::udp_receiver_port,
-  $use_flow_control                   = $carbon::use_flow_control,
-  $use_insecure_unpickler             = $carbon::use_insecure_unpickler,
-  $use_whitelist                      = $carbon::use_whitelist,
-  $user                               = $carbon::user,
-  $whisper_autoflush                  = $carbon::whisper_autoflush,
-  $whisper_fallocate_create           = $carbon::whisper_fallocate_create,
-  $whisper_lock_writes                = $carbon::whisper_lock_writes,
-  $whisper_sparse_create              = $carbon::whisper_sparse_create,
-  $whitelists_dir                     = $carbon::whitelists_dir,
-){
-  ### create config directory
-  file {
-    $config_dir:
-      ensure => directory,
-      group  => $group,
-      mode   => '0755',
-      owner  => $user,
+  $amqp_exchange                      = $::carbon::amqp_exchange,
+  $amqp_host                          = $::carbon::amqp_host,
+  $amqp_metric_name_in_body           = $::carbon::amqp_metric_name_in_body,
+  $amqp_password                      = $::carbon::amqp_password,
+  $amqp_port                          = $::carbon::amqp_port,
+  $amqp_user                          = $::carbon::amqp_user,
+  $amqp_verbose                       = $::carbon::amqp_verbose,
+  $amqp_vhost                         = $::carbon::amqp_vhost,
+  $cache_query_interface              = $::carbon::cache_query_interface,
+  $cache_query_port                   = $::carbon::cache_query_port,
+  $cache_write_strategy               = $::carbon::cache_write_strategy,
+  $carbon_aggregator_enabled          = $::carbon::carbon_aggregator_enabled,
+  $carbon_cache_enabled               = $::carbon::carbon_cache_enabled,
+  $carbon_caches                      = $::carbon::carbon_caches,
+  $carbon_metric_interval             = $::carbon::carbon_metric_interval,
+  $carbon_metric_prefix               = $::carbon::carbon_metric_prefix,
+  $carbon_relay_enabled               = $::carbon::carbon_relay_enabled,
+  $config_dir                         = $::carbon::config_dir,
+  $config_filename                    = $::carbon::config_filename,
+  $database                           = $::carbon::database,
+  $destination_protocol               = $::carbon::destination_protocol,
+  $enable_amqp                        = $::carbon::enable_amqp,
+  $enable_log_rotation                = $::carbon::enable_log_rotation,
+  $enable_manhole                     = $::carbon::enable_manhole,
+  $udp_listener_enabled               = $::carbon::udp_listener_enabled,
+  $line_receiver_interface            = $::carbon::line_receiver_interface,
+  $line_receiver_port                 = $::carbon::line_receiver_port,
+  $log_cache_hits                     = $::carbon::log_cache_hits,
+  $log_cache_queue_sorts              = $::carbon::log_cache_queue_sorts,
+  $log_creates                        = $::carbon::log_creates,
+  $log_dir                            = $::carbon::log_dir,
+  $log_listener_conn_success          = $::carbon::log_listener_conn_success,
+  $log_updates                        = $::carbon::log_updates,
+  $max_cache_size                     = $::carbon::max_cache_size,
+  $max_creates_per_minute             = $::carbon::max_creates_per_minute,
+  $max_datapoints_per_message         = $::carbon::max_datapoints_per_message,
+  $max_queue_size                     = $::carbon::max_queue_size,
+  $max_receiver_connections           = $::carbon::max_receiver_connections,
+  $max_updates_per_second             = $::carbon::max_updates_per_second,
+  $max_updates_per_second_on_shutdown = $::carbon::max_updates_per_second_on_shutdown,
+  $metric_client_idle_timeout         = $::carbon::metric_client_idle_timeout,
+  $min_reset_interval                 = $::carbon::min_reset_interval,
+  $min_reset_ratio                    = $::carbon::min_reset_ratio,
+  $min_reset_stat_flow                = $::carbon::min_reset_stat_flow,
+  $min_timestamp_resolution           = $::carbon::min_timestamp_resolution,
+  $pickle_receiver_interface          = $::carbon::pickle_receiver_interface,
+  $pickle_receiver_port               = $::carbon::pickle_receiver_port,
+  $pid_dir                            = $::carbon::pid_dir,
+  $protobuf_receiver_enabled          = $::carbon::protobuf_receiver_enabled,
+  $relay_method                       = $::carbon::relay_method,
+  $relay_user                         = $::carbon::relay_user,
+  $replication_factor                 = $::carbon::replication_factor,
+  $rules_enabled                      = $::carbon::rules_enabled,
+  $protobuf_receiver_interface        = $::carbon::protobuf_receiver_interface,
+  $protobuf_receiver_port             = $::carbon::protobuf_receiver_port,
+  $queue_low_watermark_pct            = $::carbon::queue_low_watermark_pct,
+  $storage_dir                        = $::carbon::storage_dir,
+  $time_to_defer_sending              = $::carbon::time_to_defer_sending,
+  $udp_receiver_interface             = $::carbon::udp_receiver_interface,
+  $udp_receiver_port                  = $::carbon::udp_receiver_port,
+  $use_flow_control                   = $::carbon::use_flow_control,
+  $use_insecure_unpickler             = $::carbon::use_insecure_unpickler,
+  $use_ratio_reset                    = $::carbon::use_ratio_reset,
+  $use_whitelist                      = $::carbon::use_whitelist,
+  $user                               = $::carbon::user,
+  $whisper_autoflush                  = $::carbon::whisper_autoflush,
+  $whisper_fadvise_random             = $::carbon::whisper_fadvise_random,
+  $whisper_fallocate_create           = $::carbon::whisper_fallocate_create,
+  $whisper_lock_writes                = $::carbon::whisper_lock_writes,
+  $whisper_sparse_create              = $::carbon::whisper_sparse_create,
+) {
+
+  $config_file = "${config_dir}/${config_filename}"  
+
+  concat { $config_file:
+    path    => $config_file,
+    mode    => '0644',
+    owner   => 'root',
+    group   => 'root',
   }
 
-  ### create data directory
-  file {
-    $local_data_dir:
-      ensure => directory,
-      group  => $group,
-      mode   => '0755',
-      owner  => $user,
-  }
-
-  ### create storage-schemas.conf
-  file {
-    "${config_dir}/storage-schemas.conf":
-      ensure  => file,
-      content => template("carbon${config_dir}/storage-schemas.conf.erb"),
-      group   => $group,
-      mode    => '0644',
-      owner   => $user,
-      require => File[$config_dir],
-  }
-
-  ### create storage-aggregation.conf
-  file {
-    "${config_dir}/storage-aggregation.conf":
-      ensure  => file,
-      content => template("carbon${config_dir}/storage-aggregation.conf.erb"),
-      group   => $group,
-      mode    => '0644',
-      owner   => $user,
-      require => File[$config_dir],
-  }
-
-  if $enable_carbon_cache {
-
-    ### create carbon.conf file
-    concat { $config_file:
-      ensure => present,
-      group  => $group,
-      mode   => '0644',
-      owner  => $user,
-#      notify => Service[$carbon_c_relay::service_name]
-    }
-  
-    ### create header in carbon.conf
-    concat::fragment { $config_filename:
+  if $carbon_cache_enabled {
+    concat::fragment { 'carbon config - general':
       target  => $config_file,
-      order   => '10',
-      content => file("carbon${config_dir}/carbon.conf"),
-      require => File[$config_dir],
+      content => template('carbon/etc/carbon/carbon.conf.general.erb'),
+      order   => '01'
     }
 
-    $cache_defaults = {
-      amqp_exchange                      => $amqp_exchange,
-      amqp_host                          => $amqp_host,
-      amqp_metric_name_in_body           => $amqp_metric_name_in_body,
-      amqp_password                      => $amqp_password,
-      amqp_port                          => $amqp_port,
-      amqp_user                          => $amqp_user,
-      amqp_verbose                       => $amqp_verbose,
-      amqp_vhost                         => $amqp_vhost,
-      bind_patterns                      => $bind_patterns,
-      cache_query_backlog                => $cache_query_backlog,
-      cache_query_interface              => $cache_query_interface,
-      cache_query_port                   => $cache_query_port,
-      cache_template                     => $cache_template,
-      cache_write_strategy               => $cache_write_strategy,
-      carbon_metric_interval             => $carbon_metric_interval,
-      carbon_metric_prefix               => $carbon_metric_prefix,
-      config_dir                         => $config_dir,
-      config_file                        => $config_file,
-      enable_amqp                        => $enable_amqp,
-      enable_logrotation                 => $enable_logrotation,
-      enable_manhole                     => $enable_manhole,
-      enable_udp_listener                => $enable_udp_listener,
-      line_receiver_backlog              => $line_receiver_backlog,
-      line_receiver_interface            => $line_receiver_interface,
-      line_receiver_port                 => $line_receiver_port,
-      local_data_dir                     => $local_data_dir,
-      log_cache_hits                     => $log_cache_hits,
-      log_cache_queue_sorts              => $log_cache_queue_sorts,
-      log_dir                            => $log_dir,
-      log_listener_connections           => $log_listener_connections,
-      log_updates                        => $log_updates,
-      manhole_interface                  => $manhole_interface,
-      manhole_port                       => $manhole_port,
-      manhole_public_key                 => $manhole_public_key,
-      manhole_user                       => $manhole_user,
-      max_cache_size                     => $max_cache_size,
-      max_creates_per_minute             => $max_creates_per_minute,
-      max_updates_per_second             => $max_updates_per_second,
-      max_updates_per_second_on_shutdown => $max_updates_per_second_on_shutdown,
-      pickle_receiver_backlog            => $pickle_receiver_backlog,
-      pickle_receiver_interface          => $pickle_receiver_interface,
-      pickle_receiver_port               => $pickle_receiver_port,
-      pid_dir                            => $pid_dir,
-      storage_dir                        => $storage_dir,
-      udp_receiver_interface             => $udp_receiver_interface,
-      udp_receiver_port                  => $udp_receiver_port,
-      use_flow_control                   => $use_flow_control,
-      use_insecure_unpickler             => $use_insecure_unpickler,
-      use_whitelist                      => $use_whitelist,
-      user                               => $user,
-      whisper_autoflush                  => $whisper_autoflush,
-      whisper_fallocate_create           => $whisper_fallocate_create,
-      whisper_lock_writes                => $whisper_lock_writes,
-      whisper_sparse_create              => $whisper_sparse_create,
-      whitelists_dir                     => $whitelists_dir,
-    }
-
-    ### create [cache:x] fragments in carbon.conf
-    if empty( $carbon_caches ) {
-      create_resources( 'carbon::config::cache', { a => undef }, $cache_defaults )
-    } else {
-      create_resources( 'carbon::config::cache', $carbon_caches, $cache_defaults )
-    }
-
-    ### create systemd files
-    if !empty( $carbon_caches ) {
-      ### remove existing carbon-cache.service file
-      file { "${systemd_dir}/carbon-cache.service":
-        ensure => absent,
+    $carbon_caches.keys().each |$cache| {
+      $values = $carbon_caches[$cache]
+      carbon::cache::config { "${cache}":
+        cache_query_port          => pick( $values[cache_query_port], $cache_query_port ),
+        config_file               => $config_file,
+        line_receiver_port        => pick( $values[line_receiver_port], $line_receiver_port ),
+        pickle_receiver_port      => pick( $values[pickle_receiver_port], $pickle_receiver_port ),
+        protobuf_receiver_enabled => pick( $values[protobuf_receiver_enabled], $protobuf_receiver_enabled ),
+        protobuf_receiver_port    => pick( $values[protobuf_receiver_port], $protobuf_receiver_port ),
+        udp_listener_enabled      => pick( $values[udp_listener_enabled], $udp_listener_enabled ),
+        udp_receiver_port         => pick( $values[udp_receiver_port], $udp_receiver_port ),
       }
-      ### create service files for all cache instances
-      carbon::config::service { keys( $carbon_caches ):
-        systemd_dir => $systemd_dir,
-        template    => $cache_service_template,
-      }
+    }
+  }
+
+  if $carbon_relay_enabled {
+    concat::fragment { 'carbon config - relay':
+      target  => $config_file,
+      content => template('carbon/etc/carbon/carbon.conf.relay.erb'),
+      order   => '03'
+    }
+
+    file { 'relay-rules.conf':
+      path    => "${config_dir}/relay-rules.conf",
+      content => template('carbon/etc/carbon/relay-rules.conf.erb'),
+      owner   => 'root',
+      group   => 'root',
+    }
+  }
+
+  if $carbon_aggregator_enabled {
+    concat::fragment { 'carbon config - aggregator':
+      target => $config_file,
+      content => template('carbon/etc/carbon/carbon.conf.aggregator.erb'),
+      order => '04'
     }
   }
 }
