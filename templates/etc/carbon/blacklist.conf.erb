@@ -1,0 +1,18 @@
+# ==============================================================================
+# blacklist.conf - Managed by Puppet
+# ==============================================================================
+
+# This file takes a single regular expression per line
+# If USE_WHITELIST is set to True in carbon.conf, any metrics received which
+# match one of these expressions will be dropped.
+# This file is reloaded automatically when changes are made.
+<% @blacklist_metrics.each do |line| -%>
+<%= line %>
+<% end -%>
+
+# Reject metrics with multiple or surrounding dots, since they lead to
+# counter intuitive behaviour when read (then can be read from disk but not
+# from carbon-cache, at least with whisper data back-end)
+\.\.
+^\.
+\.$

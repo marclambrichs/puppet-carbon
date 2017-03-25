@@ -7,6 +7,7 @@ class carbon::config (
   $amqp_user                          = $::carbon::amqp_user,
   $amqp_verbose                       = $::carbon::amqp_verbose,
   $amqp_vhost                         = $::carbon::amqp_vhost,
+  $blacklist_metrics                  = $::carbon::blacklist_metrics,  
   $cache_query_interface              = $::carbon::cache_query_interface,
   $cache_query_port                   = $::carbon::cache_query_port,
   $cache_write_strategy               = $::carbon::cache_write_strategy,
@@ -69,6 +70,7 @@ class carbon::config (
   $whisper_fallocate_create           = $::carbon::whisper_fallocate_create,
   $whisper_lock_writes                = $::carbon::whisper_lock_writes,
   $whisper_sparse_create              = $::carbon::whisper_sparse_create,
+  $whitelist_metrics                  = $::carbon::whitelist_metrics,    
 ) {
 
   $config_file = "${config_dir}/${config_filename}"  
@@ -124,4 +126,21 @@ class carbon::config (
       order => '04'
     }
   }
+
+  if $use_whitelist == 'True' {
+    file { 'blacklist.conf':
+      path => "${config_dir}/blacklist.conf",
+      content => template('carbon/etc/carbon/blacklist.conf.erb'),
+      owner => 'root',
+      group => 'root',
+    }
+
+    file { 'whitelist.conf':
+      path => "${config_dir}/whitelist.conf",
+      content => template('carbon/etc/carbon/whitelist.conf.erb'),
+      owner => 'root',
+      group => 'root',
+    }    
+  }
+  
 }

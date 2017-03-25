@@ -12,6 +12,7 @@
 # @param amqp_user
 # @param amqp_verbose
 # @param amqp_vhost
+# @param blacklist_metrics
 # @param cache_query_interface
 # @param cache_query_port
 # @param cache_write_strategy
@@ -83,6 +84,7 @@
 # @param whisper_fallocate_create
 # @param whisper_lock_writes
 # @param whisper_sparse_create
+# @param whitelist_metrics
 #
 # === Authors
 #
@@ -101,6 +103,7 @@ class carbon (
   $amqp_user                          = 'guest',
   $amqp_verbose                       = 'False',
   $amqp_vhost                         = '/',
+  $blacklist_metrics                  = [],
   $cache_query_interface              = '0.0.0.0',
   $cache_query_port                   = 7002,
   $cache_write_strategy               = 'sorted',
@@ -172,6 +175,7 @@ class carbon (
   $whisper_fallocate_create           = 'True',
   $whisper_lock_writes                = 'False',
   $whisper_sparse_create              = 'False',
+  $whitelist_metrics                  = ['.*'],  
 )  {
 
   member( ['rules', 'consistent-hashing', 'aggregated-consistent-hashing'], $relay_method )
