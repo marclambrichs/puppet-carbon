@@ -44,8 +44,8 @@ class carbon::service (
 
   service { 'carbon-relay':
     name   => 'carbon-relay',
-    enable => $carbon_cache_enabled,
-    ensure => $carbon_cache_ensure,
+    enable => $carbon_relay_enabled,
+    ensure => $carbon_relay_ensure,
   }
 
   File['carbon-relay.service'] ~> Service['carbon-relay']
