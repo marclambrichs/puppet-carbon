@@ -116,13 +116,13 @@ class carbon (
   $carbon_metric_prefix               = 'carbon',
   $carbon_pkg                         = 'python-carbon',
   $carbon_relay_enabled               = true,
-  $carbon_relay_ensure                = running,  
+  $carbon_relay_ensure                = running,
   $config_dir                         = '/etc/carbon',
   $config_filename                    = 'carbon.conf',
   $database                           = 'whisper',
   $destination_protocol               = 'pickle',
   $enable_amqp                        = 'False',
-  $enable_log_rotation                = 'True',  
+  $enable_log_rotation                = 'True',
   $enable_manhole                     = 'False',
   $group                              = 'carbon',
   $line_receiver_interface            = '0.0.0.0',
@@ -175,16 +175,16 @@ class carbon (
   $whisper_fallocate_create           = 'True',
   $whisper_lock_writes                = 'False',
   $whisper_sparse_create              = 'False',
-  $whitelist_metrics                  = ['.*'],  
+  $whitelist_metrics                  = ['.*'],
 )  {
 
   member( ['rules', 'consistent-hashing', 'aggregated-consistent-hashing'], $relay_method )
   member( ['line', 'pickle', 'udp', 'protobuf'], $destination_protocol )
 
-  anchor { 'carbon::begin': }->
-  class{'::carbon::install': }->
-  class{'::carbon::config': }->
-  class{'::carbon::service': }->
-  anchor { 'carbon::end': }
+  anchor { 'carbon::begin': }
+  -> class{'::carbon::install': }
+  -> class{'::carbon::config': }
+  -> class{'::carbon::service': }
+  -> anchor { 'carbon::end': }
 
 }
