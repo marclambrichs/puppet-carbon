@@ -11,7 +11,7 @@ class carbon::cache::install (
   $pid_dir = $::carbon::pid_dir
 ) {
 
-  $config_file = "${config_dir}/${config_filename}"
+  $config_file = "${conf_dir}/${config_file}"
 
   concat { $config_file:
     mode    => '0644',
@@ -23,7 +23,7 @@ class carbon::cache::install (
   ###
   ### carbon.conf - directories
   ###
-  
+
 
   file { 'relay-rules.conf':
     path    => "${conf_dir}/relay-rules.conf",
@@ -33,4 +33,4 @@ class carbon::cache::install (
     content => template('carbon/etc/carbon/relay-rules.conf.erb'),
   }
 
-}    
+}

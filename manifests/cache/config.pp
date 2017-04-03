@@ -14,5 +14,5 @@ define carbon::cache::config (
     content => template('carbon/etc/carbon/carbon.conf.cache.erb'),
     order   => '02'
   }
-}    
-  
+}
+

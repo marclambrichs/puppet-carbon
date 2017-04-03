@@ -7,7 +7,7 @@ class carbon::config (
   $amqp_user                          = $::carbon::amqp_user,
   $amqp_verbose                       = $::carbon::amqp_verbose,
   $amqp_vhost                         = $::carbon::amqp_vhost,
-  $blacklist_metrics                  = $::carbon::blacklist_metrics,  
+  $blacklist_metrics                  = $::carbon::blacklist_metrics,
   $cache_query_interface              = $::carbon::cache_query_interface,
   $cache_query_port                   = $::carbon::cache_query_port,
   $cache_write_strategy               = $::carbon::cache_write_strategy,
@@ -70,16 +70,16 @@ class carbon::config (
   $whisper_fallocate_create           = $::carbon::whisper_fallocate_create,
   $whisper_lock_writes                = $::carbon::whisper_lock_writes,
   $whisper_sparse_create              = $::carbon::whisper_sparse_create,
-  $whitelist_metrics                  = $::carbon::whitelist_metrics,    
+  $whitelist_metrics                  = $::carbon::whitelist_metrics,
 ) {
 
-  $config_file = "${config_dir}/${config_filename}"  
+  $config_file = "${config_dir}/${config_filename}"
 
   concat { $config_file:
-    path    => $config_file,
-    mode    => '0644',
-    owner   => 'root',
-    group   => 'root',
+    path  => $config_file,
+    mode  => '0644',
+    owner => 'root',
+    group => 'root',
   }
 
   if $carbon_cache_enabled {
@@ -91,7 +91,7 @@ class carbon::config (
 
     $carbon_caches.keys().each |$cache| {
       $values = $carbon_caches[$cache]
-      carbon::cache::config { "${cache}":
+      carbon::cache::config { $cache:
         cache_query_port          => pick( $values[cache_query_port], $cache_query_port ),
         config_file               => $config_file,
         line_receiver_port        => pick( $values[line_receiver_port], $line_receiver_port ),
@@ -121,26 +121,26 @@ class carbon::config (
 
   if $carbon_aggregator_enabled {
     concat::fragment { 'carbon config - aggregator':
-      target => $config_file,
+      target  => $config_file,
       content => template('carbon/etc/carbon/carbon.conf.aggregator.erb'),
-      order => '04'
+      order   => '04'
     }
   }
 
   if $use_whitelist == 'True' {
     file { 'blacklist.conf':
-      path => "${config_dir}/blacklist.conf",
+      path    => "${config_dir}/blacklist.conf",
       content => template('carbon/etc/carbon/blacklist.conf.erb'),
-      owner => 'root',
-      group => 'root',
+      owner   => 'root',
+      group   => 'root',
     }
 
     file { 'whitelist.conf':
-      path => "${config_dir}/whitelist.conf",
+      path    => "${config_dir}/whitelist.conf",
       content => template('carbon/etc/carbon/whitelist.conf.erb'),
-      owner => 'root',
-      group => 'root',
-    }    
+      owner   => 'root',
+      group   => 'root',
+    }
   }
-  
+
 }

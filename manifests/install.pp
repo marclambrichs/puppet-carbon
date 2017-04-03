@@ -18,9 +18,9 @@ class carbon::install (
 
   group { $group:
     ensure => present,
-  } ->
+  }
 
-  user { $user:
+  -> user { $user:
     ensure => present,
     groups => $group,
   }
@@ -32,4 +32,4 @@ class carbon::install (
     }
   }
 
-}    
+}
